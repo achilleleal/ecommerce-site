@@ -20,6 +20,7 @@ h1, h2, p {
 
 .nav-bar {
   margin: 0;
+  padding-left: 0;
   display: flex;
   justify-content: space-around;
 }
@@ -32,6 +33,16 @@ h1, h2, p {
 .link:hover {
   transition: 200ms;
   color: darkorange;
+}
+
+.search-bar {
+  border-radius: .5rem;
+  border-width: 0 0 .2rem 0;
+  border-color: rgb(47, 53, 65);
+  width: 80%;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
 }
 
 main {

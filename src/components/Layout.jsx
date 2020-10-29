@@ -1,4 +1,5 @@
 import React from 'react'
+import Searchbar from './Searchbar';
 
 const Link = ({ to, onClick, image }) => {
     return (
@@ -9,7 +10,8 @@ const Link = ({ to, onClick, image }) => {
     );
 }
 
-export default function Layout({ children, setRoute, logout }) {
+export default function Layout({ children, setSearch, setRoute, logout }) {
+
     return (
         <>
             <header>
@@ -18,17 +20,17 @@ export default function Layout({ children, setRoute, logout }) {
                         <Link 
                           to="ReactMart"
                           image=""
-                          onClick={() => setRoute()}
+                          onClick={() => setRoute('home')}
                         />
                         <Link 
                           to="Cart"
                           image=""
-                          onClick={() => setRoute()}
+                          onClick={() => setRoute('cart')}
                         />
                         <Link 
                           to="Profile"
                           image=""
-                          onClick={() => setRoute()}
+                          onClick={() => setRoute('profile')}
                         />
                         <Link 
                           to="Logout"
@@ -37,6 +39,7 @@ export default function Layout({ children, setRoute, logout }) {
                         />
                     </ul>
                 </nav>
+                <Searchbar setSearch={setSearch} />
             </header>
             <main>
                 {children}
