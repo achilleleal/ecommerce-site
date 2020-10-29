@@ -1,10 +1,19 @@
 import React from 'react';
+import ItemCard from './ItemCard';
 
-export default function Home() {
+export default function Home({ items, viewItem }) {
 
     return (
-        <>
-            Home
-        </>
+        <div className="home">
+            {items.map(item => 
+                    <ItemCard 
+                      name={item.name}
+                      price={item.price}
+                      image={item.image}
+                      viewItem={() => viewItem(item)}
+                    />
+                )
+            }
+        </div>
     )
 }

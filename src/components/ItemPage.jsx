@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function ProductPage() {
+export default function ItemPage() {
     return (
         <div>
             Product
