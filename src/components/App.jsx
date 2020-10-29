@@ -12,15 +12,12 @@ function App() {
   // Clear searchbar on route change
   useEffect(() => {
     setSearch('')
-    
   }, [route])
-console.log(search)
+
   const [items, setItems] = useState([]); // Store products
   // Fetch items from server
   useEffect(() => {
-    // fetch()
-    // .then(resp => resp.json())
-    // .then(data => setItems(data))
+    // Fetch items from server
     setItems(list)
   }, [])
 
@@ -30,7 +27,7 @@ console.log(search)
     setCurrentItem(item);
     setRoute('item');
   }
-  
+
 
   return (
     <Layout setRoute={setRoute} setSearch={setSearch}>

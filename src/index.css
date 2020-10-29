@@ -9,8 +9,9 @@ body {
 
 /* Reset margin styles */
 h1, h2, h3, p {
-  margin: 0 auto;
+  margin: 0;
 }
+/*-*/
 
 header, footer {
   text-align: center;
@@ -47,6 +48,10 @@ header, footer {
   font-size: 1rem;
 }
 
+.search-bar:focus {
+  caret-color: darkorange;
+}
+
 main {
   min-height: 90vh;
 }
@@ -60,12 +65,14 @@ main {
   margin: 0 auto;
 }
 
+/* Media Query for the Home Component */
 @media (min-width: 1400px) {
   .home {
     grid-template-columns: repeat(3, 1fr);
     max-width: 1200px;
   }
 }
+/*-*/
 
 .card {
   padding: 1rem;
@@ -74,3 +81,52 @@ main {
   border-color: rgba(47, 53, 65, 0.5);
   border-radius: .2rem;
 }
+
+#item-page {
+  padding: 1.5rem 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+#item-page h1 {
+  font-size: 2rem;
+}
+
+#item-page h1,
+#item-page h3 {
+  margin-top: .25rem;
+}
+
+#item-page h1 {
+  font-size: 2em;
+  margin-bottom: 0.5rem;
+}
+
+#item-page h3 {
+  font-size: 1.1em;
+  margin-bottom: .25rem;
+}
+
+/* Media Query for the ItemPage Component */
+@media (min-width: 600px) {
+  .item-page_head {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #item-page h1,
+  #item-page h3 {
+    margin-top: .5rem;
+  }
+  
+  #item-page h1 {
+    font-size: 2.5em;
+    margin-bottom: 1rem;
+  }
+  
+  #item-page h3 {
+    font-size: 1.5em;
+  }
+}
+/*-*/
