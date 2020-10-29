@@ -9,28 +9,31 @@ body {
 
 header, footer {
   text-align: center;
-  background-color: #2372d2;
-  margin: 0;
-  padding: .5rem;
   color: white;
-  font-size: 1.5em;
+  background-color: rgb(47, 53, 65);
+  padding: 1rem 0;
 }
 
-.card {
-  border: solid 1px darkslategrey;
-  border-radius: 1rem;
-  padding: 5%;
-  margin: 1rem;
-  width: 100%;
-  height: 100%;
-  transition: 0.5s;
+h1, h2, p {
+  margin: 0 auto;
 }
 
-.card:hover {
-  transform: scale(1.05);
-}
-
-.card .card-description {
+.nav-bar {
+  margin: 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+}
+
+.link:hover {
+  transition: 200ms;
+  color: darkorange;
+}
+
+main {
+  min-height: 90vh;
 }
