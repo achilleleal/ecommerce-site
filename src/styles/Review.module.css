@@ -1,0 +1,34 @@
+.review {
+    margin: 1rem;
+    padding: .5rem;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 15%;
+    padding: 0 .5rem;
+}
+
+.pf_image {
+    width: 50%;
+    min-width: 50px;
+}
+
+.content {
+    padding-left: .5rem;
+    border-left: solid .1rem rgba(47, 53, 65, 0.5);
+}
+
+.content h3 {
+    margin-bottom: .5rem;
+}
+
+.review span {
+    color: grey;
+}

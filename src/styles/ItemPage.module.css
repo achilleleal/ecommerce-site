@@ -1,0 +1,49 @@
+.page {
+    padding: 1.5rem 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.card {
+    margin-bottom: 3rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card h1,
+.card h3 {
+    margin-top: .25rem;
+}
+
+.card h1 {
+    font-size: 2em;
+    margin-bottom: 0.5rem;
+}
+
+.card h3 {
+    font-size: 1.1em;
+    margin-bottom: .25rem;
+}
+
+
+@media (min-width: 600px) {
+    .head {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .card h1,
+    .card h3 {
+        margin-top: .5rem;
+    }
+
+    .card h1 {
+        font-size: 2.5em;
+        margin-bottom: 1rem;
+    }
+
+    .card h3 {
+        font-size: 1.5em;
+    }
+}

@@ -1,0 +1,14 @@
+.search-bar {
+    border-radius: .5rem;
+    border-width: 0 0 .2rem 0;
+    border-color: rgb(47, 53, 65);
+    width: 80%;
+    margin-top: 1rem;
+    max-width: 800px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+}
+
+.search-bar:focus {
+    caret-color: rgb(255, 115, 0);
+}

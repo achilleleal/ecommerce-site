@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import OrderAmount from '../components/OrderAmount'
 import Review from '../components/Review'
 import LeaveReview from '../components/LeaveReview'
+import styles from '../styles/itemPage.module.css'
 
 export default function ItemPage({ item, isLoggedIn, setRoute }) {
 
@@ -32,11 +33,11 @@ export default function ItemPage({ item, isLoggedIn, setRoute }) {
     const { image, name, price, description } = item;
 
     return (
-        <div id="item-page">
-            <section className="card item-card">
+        <div className={styles.page}>
+            <section className={`card ${styles.card}`}>
                 <img src={image} alt=''/>
                 <article>
-                    <div className="item-page_head">
+                    <div className={styles.head}>
                         <h1>{name}</h1>
                         <h1>{price}</h1>
                     </div>

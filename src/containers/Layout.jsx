@@ -1,5 +1,6 @@
 import React from 'react'
 import Searchbar from '../components/Searchbar';
+import '../styles/Layout.css'
 
 const Link = ({ to, onClick, image }) => {
     return (
@@ -41,9 +42,9 @@ export default function Layout({ children, setSearch, setRoute, logout }) {
                 </nav>
                 <Searchbar setSearch={setSearch} />
             </header>
-            <main>
+            <div className="page">
                 {children}
-            </main>
+            </div>
             <footer>
                 <p>Made with love by Sebastián Leal. 2020.</p>
             </footer>
