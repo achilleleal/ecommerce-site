@@ -31,17 +31,11 @@ function App() {
 
   return (
     <Layout setRoute={setRoute} setSearch={setSearch}>
-      {route === 'home'
-        ? <Home items={items} viewItem={viewItem}/> 
-      :(route === 'item'
-          ? <ItemPage item={currentItem}/>
-          : ''
-      // :(route === 'cart' 
-      //     ? <Cart />
-      //     : <Profile />
-      //       )
-          )
-      }
+      {/* PAGE ROUTING: When route matches, it returns the component.*/}
+      {route === 'home' && <Home items={items} viewItem={viewItem}/>}
+      {route === 'item' && <ItemPage item={currentItem}/>}
+      {/* {route === 'cart' && <Cart />} */}
+      {/* {route === 'profile' && <Profile />} */}
     </Layout>
   );
 }
