@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Review from './Review'
+import Review from '../components/Review'
 
 export default function ItemPage({ item }) {
 
