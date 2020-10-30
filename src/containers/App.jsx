@@ -6,34 +6,50 @@ import list from '../products'
 
 function App() {
 
-  const [route, setRoute] = useState('home');
+  //* User auth, login & logout
 
-  const [search, setSearch] = useState(''); //Searchbar value
-  // Clear searchbar on route change
-  useEffect(() => {
-    setSearch('')
-  }, [route])
+    const [isLoggedIn, setLoggedIn] = useState(false);
 
-  const [items, setItems] = useState([]); // Store products
-  // Fetch items from server
-  useEffect(() => {
+    function logout() {
+      setLoggedIn(false)
+    }
+
+
+
+  //* Routing
+    const [route, setRoute] = useState('home');
+
+
+
+  //* Searchbar
+    const [search, setSearch] = useState('');
+    // Clear searchbar on route change
+    useEffect(() => {
+      setSearch('')
+    }, [route])
+
+
+
+  //* Store's products
+    const [items, setItems] = useState([]);
     // Fetch items from server
-    setItems(list)
-  }, [])
+    useEffect(() => {
+      // Fetch items from server
+      setItems(list)
+    }, [])
 
-  const [currentItem, setCurrentItem] = useState({});
+    const [currentItem, setCurrentItem] = useState({});
 
-  function viewItem(item) {
-    setCurrentItem(item);
-    setRoute('item');
-  }
-
+    function viewItem(item) {
+      setCurrentItem(item);
+      setRoute('item');
+    }
 
   return (
-    <Layout setRoute={setRoute} setSearch={setSearch}>
+    <Layout setRoute={setRoute} setSearch={setSearch} isLoggedIn={isLoggedIn} logout={() => setLoggedIn(!isLoggedIn)}>
       {/* PAGE ROUTING: When route matches, it returns the component.*/}
       {route === 'home' && <Home items={items} viewItem={viewItem}/>}
-      {route === 'item' && <ItemPage item={currentItem}/>}
+      {route === 'item' && <ItemPage item={currentItem} isLoggedIn={isLoggedIn} setRoute={setRoute}/>}
       {/* {route === 'cart' && <Cart />} */}
       {/* {route === 'profile' && <Profile />} */}
     </Layout>

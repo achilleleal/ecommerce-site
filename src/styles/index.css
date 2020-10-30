@@ -20,6 +20,10 @@ header, footer {
   padding: 1rem 0;
 }
 
+.round {
+  border-radius: .5rem;
+}
+
 .nav-bar {
   margin: 0;
   padding-left: 0;
@@ -34,7 +38,7 @@ header, footer {
 
 .link:hover {
   transition: 200ms;
-  color: darkorange;
+  color: rgb(255, 115, 0);
 }
 
 .search-bar {
@@ -49,7 +53,7 @@ header, footer {
 }
 
 .search-bar:focus {
-  caret-color: darkorange;
+  caret-color: rgb(255, 115, 0);
 }
 
 main {

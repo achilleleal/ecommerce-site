@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Review from '../components/Review'
+import LeaveReview from '../components/LeaveReview'
 
-export default function ItemPage({ item }) {
+export default function ItemPage({ item, isLoggedIn, setRoute }) {
 
     const [reviews, setReviews] = useState([{
     // PLACEHOLDER
@@ -41,10 +42,12 @@ export default function ItemPage({ item }) {
             </section>
 
             <div >
-                <h1>Reviews</h1>
+                <LeaveReview isLoggedIn={isLoggedIn} setRoute={setRoute}/>
+                <h1>User reviews</h1>
                 <div>
-                    {reviews.map(review => 
-                            <Review 
+                    {reviews.map((review, i) => 
+                            <Review
+                                key={i}
                                 user={review.username}
                                 profileImg={review.profileImg}
                                 rating={review.rating}
