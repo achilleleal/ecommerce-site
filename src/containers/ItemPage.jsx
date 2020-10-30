@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import OrderAmount from '../components/OrderAmount'
 import Review from '../components/Review'
 import LeaveReview from '../components/LeaveReview'
 
@@ -25,6 +26,9 @@ export default function ItemPage({ item, isLoggedIn, setRoute }) {
         // setReviews(data)
     // }, [])
 
+    // Amount of item to be added to cart
+    const [amount, setAmount] = useState(1);
+
     const { image, name, price, description } = item;
 
     return (
@@ -36,6 +40,7 @@ export default function ItemPage({ item, isLoggedIn, setRoute }) {
                         <h1>{name}</h1>
                         <h1>{price}</h1>
                     </div>
+                    <OrderAmount amount={amount} setAmount={setAmount} />
                     <h3>Product Info</h3>
                     <p>{description}</p>
                 </article>

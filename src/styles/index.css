@@ -24,6 +24,14 @@ header, footer {
   border-radius: .5rem;
 }
 
+.flex {
+  display: flex;
+}
+
+.col {
+  flex-direction: column;
+}
+
 .nav-bar {
   margin: 0;
   padding-left: 0;
