@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function ItemCard({ name, price, image, viewItem, inCart }) {
     return (
-        <article className="card grow" onClick={viewItem}>
+        <article className="card grow pointer" onClick={viewItem}>
             <img src={image} alt='' className="card_image" />
             <hr />
             <div className="flex between center-y">

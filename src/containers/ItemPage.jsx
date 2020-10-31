@@ -5,7 +5,7 @@ import LeaveReview from '../components/LeaveReview'
 import styles from '../styles/ItemPage.module.css'
 import list from '../reviews'
 
-export default function ItemPage({ item, isLoggedIn, setRoute, stock, handleCart }) {
+export default function ItemPage({ item, loggedIn, setRoute, stock, handleCart }) {
 
     const [reviews, setReviews] = useState([])
     const [inCart, setInCart] = useState(item.inCart)
@@ -30,15 +30,21 @@ export default function ItemPage({ item, isLoggedIn, setRoute, stock, handleCart
                         <h1>{name}</h1>
                         <h1>{price}</h1>
                     </div>
+                    {
                     <div className={styles.cart_zone}>
                         <button 
                           className='btn'
-                          onClick={() => handleCart(item, amount, setInCart)}
+                          onClick={() => {
+                            loggedIn 
+                              ? handleCart(item, amount, setInCart)
+                              : setRoute('signin')
+                          }}
                         >
                             {!inCart ? 'Add to cart' : 'Remove from cart'}    
                         </button>
                         {!inCart && <OrderAmount amount={amount} setAmount={setAmount} />}
                     </div>
+                    }
                     <h3>Product Info</h3>
                     <p className={stock ? 'ok' : 'err'}>
                         {stock 
@@ -51,7 +57,7 @@ export default function ItemPage({ item, isLoggedIn, setRoute, stock, handleCart
             </section>
 
             <div >
-                <LeaveReview isLoggedIn={isLoggedIn} setRoute={setRoute}/>
+                <LeaveReview loggedIn={loggedIn} setRoute={setRoute}/>
                 <h1>User reviews</h1>
                 <div>
                     {reviews.map((review, i) => 

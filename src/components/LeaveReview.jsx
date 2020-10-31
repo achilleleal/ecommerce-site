@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styles from '../styles/LeaveReview.module.css'
 
-export default function LeaveReview({ isLoggedIn, setRoute }) {
+export default function LeaveReview({ loggedIn, setRoute }) {
     
     const [review, setReview] = useState('')
 
@@ -13,7 +13,7 @@ export default function LeaveReview({ isLoggedIn, setRoute }) {
         <div className={styles.main}>
             <h2 className={styles.title}>Leave a review:</h2>
             <div className={styles.review_zone}>
-                { isLoggedIn 
+                { loggedIn 
                     ? <>
                         <textarea type='text' 
                             placeholder="Leave a review" 

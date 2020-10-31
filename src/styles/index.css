@@ -37,6 +37,10 @@ header, footer {
   border-radius: .5rem;
 }
 
+.txt-center {
+  text-align: center;
+}
+
 .flex {
   display: flex;
 }
@@ -55,6 +59,10 @@ header, footer {
 
 .col {
   flex-direction: column;
+}
+
+.pointer {
+  cursor: pointer;
 }
 
 .card {
@@ -82,12 +90,17 @@ hr {
   min-height: 90vh;
 }
 
+button {
+  cursor: pointer;
+}
+
 .btn {
   border-radius: .5rem;
   height: auto;
   padding: .3rem .75rem;
   background-color: rgb(47, 53, 65);
   border-color: rgba(47, 53, 65, 0.8);
+  border-style: solid;
   border-width: 1px;
   color: white;
   font-size: 1.1em;

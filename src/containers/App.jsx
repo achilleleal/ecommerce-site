@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import Layout from "./Layout";
 import Home from './Home'
 import ItemPage from './ItemPage';
+import Cart from './Cart';
 import list from '../products'
 
 function App() {
 
   //* User auth, login & logout
-    const [isLoggedIn, setLoggedIn] = useState(false);
+    const [loggedIn, setLoggedIn] = useState(false);
 
     function logout() {
       setLoggedIn(false)
@@ -58,14 +59,12 @@ function App() {
     setInCart(prevInCart => !prevInCart)
   }
 
-  console.log(cart);
-
   return (
     <Layout 
       setRoute={setRoute} 
       setSearch={setSearch} 
-      isLoggedIn={isLoggedIn} 
-      logout={() => setLoggedIn(!isLoggedIn)}
+      loggedIn={loggedIn} 
+      logout={() => setLoggedIn(!loggedIn)}
     >
       {/* PAGE ROUTING: When route matches, it returns the component.*/}
 
@@ -79,15 +78,23 @@ function App() {
         {route === 'item' && 
             <ItemPage 
               item={currentItem} 
-              isLoggedIn={isLoggedIn} 
+              loggedIn={loggedIn} 
               setRoute={setRoute}
               handleCart={handleCart}
-              // cart={cart}
               stock={currentItem.stock}
             />
         }
 
-        {/* {route === 'cart' && <Cart />} */}
+        {route === 'cart' && 
+            <Cart 
+              loggedIn={loggedIn}
+              cart={cart} 
+              viewItem={viewItem}
+              handleCart={handleCart}
+              setRoute={setRoute}
+            />
+        }
+
         {/* {route === 'profile' && <Profile />} */}
     </Layout>
   );

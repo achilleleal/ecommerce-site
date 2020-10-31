@@ -1,0 +1,45 @@
+.cart {
+    padding: 1rem;
+}
+
+.empty-cart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    padding: 0 10%;
+}
+
+.empty-cart h2 {
+    margin-bottom: 1rem;
+}
+
+.cart-card {
+    display: flex;
+    margin: 0 auto;
+    margin-bottom: 0.5rem;
+    max-width: 600px;
+}
+
+.cart-main {
+    display: flex;
+    width: 90%;
+}
+
+.cart-img {
+    width: 25%;
+    height: auto;
+}
+
+.cart-info {
+    width: 75%;
+    border-left: solid 1px;
+    border-color: rgba(47, 53, 65, 0.5);
+    padding-left: 1rem;
+}
+
+.cart .btn {
+    font-size: 1em;
+    justify-content: flex-end;
+    align-items: center;
+}

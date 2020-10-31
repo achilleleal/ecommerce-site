@@ -29,12 +29,15 @@ export default [
         inCart: false,
         cartQuantity: 0,
     },
-        {
+    {
         id: 1,
         name: 'Chair',
         image: '',
         price: '19.99$',
-        description: "Lorem ipsum dolor sit amet"
+        description: "Lorem ipsum dolor sit amet",
+        stock: 15,
+        inCart: false,
+        cartQuantity: 0,
     },
     {
         id: 2,
