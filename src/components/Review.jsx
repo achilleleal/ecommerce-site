@@ -1,6 +1,6 @@
 import React from 'react';
 import luffy from './luffy.png'; //PLACEHOLDER
-import styles from '../styles/review.module.css'
+import styles from '../styles/Review.module.css'
 
 export default function Review({ user, profileImg, rating, date, content }) {
     return (

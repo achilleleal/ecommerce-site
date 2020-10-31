@@ -2,11 +2,9 @@
   This file is for:
   * Simple, general styles, like .flex
   * Styles that are shared by multiple components
-  * Really specific styles that will only be used ONCE, like .nav-bar
-  (Specific styles go at the end of the file)
 
   ! All styles specific to a component must be inside 
-  ! its corresponding .module.css file.
+  ! its corresponding .module.css or .css file.
 */
 
 /* 
@@ -43,6 +41,18 @@ header, footer {
   display: flex;
 }
 
+.between {
+  justify-content: space-between;  
+}
+
+.center-y {
+  align-items: center;
+}
+
+.center-x {
+  justify-content: center;
+}
+
 .col {
   flex-direction: column;
 }
@@ -68,7 +78,36 @@ hr {
   border-radius: 100rem;
 }
 
-
 .page {
   min-height: 90vh;
+}
+
+.btn {
+  border-radius: .5rem;
+  height: auto;
+  padding: .3rem .75rem;
+  background-color: rgb(47, 53, 65);
+  border-color: rgba(47, 53, 65, 0.8);
+  border-width: 1px;
+  color: white;
+  font-size: 1.1em;
+}
+
+.btn:hover {
+  transition: 100ms;
+  color: rgb(255, 115, 0);
+  transform: scale(1.05);
+}
+
+.btn:active {
+  transform: scale(1);
+  color: white;
+}
+
+.ok {
+  color: green;
+}
+
+.err {
+  color: red
 }

@@ -4,21 +4,30 @@ export default [
         name: 'Chair',
         image: '',
         price: '19.99$',
-        description: "Lorem ipsum dolor sit amet"
+        description: "Lorem ipsum dolor sit amet",
+        stock: 15,
+        inCart: false,
+        cartQuantity: 0,
     },
     {
         id: 2,
         name: 'Table',
         image: '',
         price: '39.99$',
-        description: "Lorem ipsum dolor sit amet"
+        description: "Lorem ipsum dolor sit amet",
+        stock: 0,
+        inCart: false,
+        cartQuantity: 0,
     },
     {
         id: 3,
         name: 'Lamp',
         image: '',
         price: '29.99$',
-        description: "Lorem ipsum dolor sit amet"
+        description: "Lorem ipsum dolor sit amet",
+        stock: 15,
+        inCart: false,
+        cartQuantity: 0,
     },
         {
         id: 1,
@@ -32,13 +41,19 @@ export default [
         name: 'Table',
         image: '',
         price: '39.99$',
-        description: "Lorem ipsum dolor sit amet"
+        description: "Lorem ipsum dolor sit amet",
+        stock: 15,
+        inCart: false,
+        cartQuantity: 0,
     },
     {
         id: 3,
         name: 'Lamp',
         image: '',
         price: '29.99$',
-        description: "Lorem ipsum dolor sit amet"
+        description: "Lorem ipsum dolor sit amet",
+        stock: 15,
+        inCart: false,
+        cartQuantity: 0,
     },
 ]

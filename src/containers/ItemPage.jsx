@@ -2,30 +2,19 @@ import React, { useState, useEffect } from 'react';
 import OrderAmount from '../components/OrderAmount'
 import Review from '../components/Review'
 import LeaveReview from '../components/LeaveReview'
-import styles from '../styles/itemPage.module.css'
+import styles from '../styles/ItemPage.module.css'
+import list from '../reviews'
 
-export default function ItemPage({ item, isLoggedIn, setRoute }) {
+export default function ItemPage({ item, isLoggedIn, setRoute, stock, handleCart }) {
 
-    const [reviews, setReviews] = useState([{
-    // PLACEHOLDER
-        username: 'Don',
-        profileImg: './luffy.png',
-        rating: '4/5',
-        date: '12/11/2002',
-        content: 'pretty nice chair'
-    },
-    {
-        username: 'Don',
-        profileImg: './luffy.png',
-        rating: '4/5',
-        date: '12/11/2002',
-        content: 'pretty nice chair'
-    }])
+    const [reviews, setReviews] = useState([])
+    const [inCart, setInCart] = useState(item.inCart)
     // Fetch the item's reviews
-    // useState(() => {
+    useState(() => {
         // Fetch the product's reviews
-        // setReviews(data)
-    // }, [])
+        setReviews(list)
+    }, [])
+
 
     // Amount of item to be added to cart
     const [amount, setAmount] = useState(1);
@@ -41,8 +30,22 @@ export default function ItemPage({ item, isLoggedIn, setRoute }) {
                         <h1>{name}</h1>
                         <h1>{price}</h1>
                     </div>
-                    <OrderAmount amount={amount} setAmount={setAmount} />
+                    <div className={styles.cart_zone}>
+                        <button 
+                          className='btn'
+                          onClick={() => handleCart(item, amount, setInCart)}
+                        >
+                            {!inCart ? 'Add to cart' : 'Remove from cart'}    
+                        </button>
+                        {!inCart && <OrderAmount amount={amount} setAmount={setAmount} />}
+                    </div>
                     <h3>Product Info</h3>
+                    <p className={stock ? 'ok' : 'err'}>
+                        {stock 
+                            ? `In stock: ${stock} left` 
+                            : 'Out of stock'
+                        }
+                    </p>
                     <p>{description}</p>
                 </article>
             </section>

@@ -25,6 +25,17 @@
     margin-bottom: .25rem;
 }
 
+.cart_zone {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin: .5rem 0;
+}
+
+p {
+    margin-bottom: .25rem;
+}
 
 @media (min-width: 600px) {
     .head {
@@ -45,5 +56,10 @@
 
     .card h3 {
         font-size: 1.5em;
+    }
+
+    .cart_zone {
+        width: 50%;
+        max-width: 300px;
     }
 }

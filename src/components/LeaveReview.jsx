@@ -24,7 +24,7 @@ export default function LeaveReview({ isLoggedIn, setRoute }) {
                         <div className={styles.send_review}>
                             <button type='submit' 
                                 onClick={postReview}
-                                className={styles.btn}
+                                className="btn"
                             >
                                 Post
                             </button>
@@ -32,12 +32,12 @@ export default function LeaveReview({ isLoggedIn, setRoute }) {
                         </>
 
                     : <>
-                        <p>You must be signed in to leave a review.</p>
+                        <p>You must be logged in to leave a review.</p>
                         <button 
-                        className={`${styles.btn} ${styles.signin}`} 
-                        onClick={() => setRoute('signin')}
+                          className={`btn ${styles.signin}`} 
+                          onClick={() => setRoute('signin')}
                         >
-                            Sign in
+                            Log in
                         </button>
                         </>
                 }

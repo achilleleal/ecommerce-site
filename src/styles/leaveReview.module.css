@@ -11,28 +11,6 @@
     margin: .5rem 0;
 }
 
-.btn {
-    border-radius: .5rem;
-    height: auto;
-    background-color: rgb(47, 53, 65);
-    padding: .3rem .75rem;
-    border-color: rgba(47, 53, 65, 0.8);
-    border-width: 1px;
-    color: white;
-    font-size: 1.1em;
-}
-
-.btn:hover {
-    transition: 100ms;
-    color: rgb(255, 115, 0);
-    transform: scale(1.05);
-}
-
-.btn:active {
-    transform: scale(1);
-    color: white;
-}
-
 .input {
     resize: unset;
     width: 75%;
@@ -53,6 +31,6 @@
     width: 25%;
 }
 
-.btn.signin {
+.signin {
     margin: 0 auto ;
 }
