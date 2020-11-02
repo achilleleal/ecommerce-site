@@ -1,5 +1,5 @@
 import React from 'react'
-import '../styles/Searchbar.css'
+import './Searchbar.css'
 
 export default function SearchBox({ setSearch }) {
     return (

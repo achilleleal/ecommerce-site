@@ -1,15 +1,7 @@
 import React from 'react'
-import Searchbar from '../components/Searchbar';
-import '../styles/Layout.css'
-
-const Link = ({ to, onClick, image }) => {
-    return (
-        <li onClick={onClick} className="link">
-            <img src={image} className="link_image" alt=''/>
-            <h1>{to}</h1>
-        </li>
-    );
-}
+import Searchbar from './Searchbar/Searchbar';
+import Link from './Link'
+import './Layout.css'
 
 export default function Layout({ children, setSearch, setRoute, logout }) {
 

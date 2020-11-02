@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react'
-import CartCard from '../components/CartCard'
-import '../styles/Cart.css'
+import CartCard from './CartCard'
+import './Cart.css'
 
 export default function Cart({ loggedIn, setRoute, cart, viewItem, handleCart }) {
     
-    // Remove $ sign from price to be able to multiply by the quantity
-    const format = price => Number(price.split('$')[0]).toFixed(2)
-
+    // Remove $ sign from price and turn into number
+    const format = price => Number(price.slice(0, - 1))
     //Calculate total price
     const calcTotal = () => cart.reduce((t, i) => t + (format(i.price) * i.cartQuantity), 0).toFixed(2)
 
+
     const [total, setTotal] = useState(calcTotal())
     const [refreshCart, setRefreshCart] = useState(false) //Refresh page on click. This way allows the user to undo deleting an item.
+
 
     useEffect(() => {
         setTotal(calcTotal())        

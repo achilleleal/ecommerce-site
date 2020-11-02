@@ -1,33 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import OrderAmount from '../components/OrderAmount'
-import Review from '../components/Review'
-import LeaveReview from '../components/LeaveReview'
-import styles from '../styles/ItemPage.module.css'
-import list from '../reviews'
+import OrderAmount from '../OrderAmount/OrderAmount'
+import Review from '../Review/Review'
+import LeaveReview from '../LeaveReview/LeaveReview'
+import styles from './ItemPage.module.css'
+import list from '../../assets/reviews'
 
 export default function ItemPage({ item, loggedIn, setRoute, stock, handleCart }) {
+    
+    const { image, name, price, description } = item;
 
-    const [reviews, setReviews] = useState([])
-    const [inCart, setInCart] = useState(item.inCart)
+    const [reviews, setReviews] = useState([]);
+    const [inCart, setInCart] = useState(item.inCart);
+    const [amount, setAmount] = useState(1); // Amount of item to be added to cart
+
+
     // Fetch the item's reviews
-    useState(() => {
-        // Fetch the product's reviews
+    useEffect(() => {
         setReviews(list)
     }, [])
+
 
     function updateCart() {
         handleCart(item, amount)
         setInCart(prevInCart => !inCart)
     }
-
-
-    // Amount of item to be added to cart
-    const [amount, setAmount] = useState(1);
-
-    const { image, name, price, description } = item;
-
+    
+    
     return (
         <div className={styles.page}>
+
             <section className={`card ${styles.card}`}>
                 <img src={image} alt=''/>
                 <article>
@@ -35,7 +36,6 @@ export default function ItemPage({ item, loggedIn, setRoute, stock, handleCart }
                         <h1>{name}</h1>
                         <h1>{price}</h1>
                     </div>
-                    {
                     <div className={styles.cart_zone}>
                         <button 
                           className='btn'
@@ -47,9 +47,13 @@ export default function ItemPage({ item, loggedIn, setRoute, stock, handleCart }
                         >
                             {!inCart ? 'Add to cart' : 'Remove from cart'}    
                         </button>
-                        {!inCart && <OrderAmount amount={amount} setAmount={setAmount} />}
+                        {!inCart && 
+                            <OrderAmount 
+                              amount={amount} 
+                              setAmount={setAmount} 
+                            />
+                        }
                     </div>
-                    }
                     <h3>Product Info</h3>
                     <p className={stock ? 'ok' : 'err'}>
                         {stock 
@@ -61,23 +65,23 @@ export default function ItemPage({ item, loggedIn, setRoute, stock, handleCart }
                 </article>
             </section>
 
-            <div >
-                <LeaveReview loggedIn={loggedIn} setRoute={setRoute}/>
+            <div>
+                <LeaveReview 
+                  loggedIn={loggedIn} 
+                  setRoute={setRoute}
+                />
                 <h1>User reviews</h1>
                 <div>
                     {reviews.map((review, i) => 
                             <Review
                                 key={i}
-                                user={review.username}
-                                profileImg={review.profileImg}
-                                rating={review.rating}
-                                date={review.date}
-                                content={review.content}
+                                review={review}
                             />
                         )
                     }
                 </div>
             </div>
+
         </div>
     )
 }

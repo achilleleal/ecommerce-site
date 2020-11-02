@@ -1,6 +1,6 @@
 import React from 'react';
-import ItemCard from '../components/ItemCard';
-import '../styles/Home.css'
+import ItemCard from '../ItemCard/ItemCard';
+import './Home.css'
 
 export default function Home({ items, viewItem }) {
 

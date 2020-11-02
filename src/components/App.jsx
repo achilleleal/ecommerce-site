@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import Layout from "./Layout";
-import Home from './Home'
-import ItemPage from './ItemPage';
-import Cart from './Cart';
-import list from '../products'
+
+import Layout from "./Layout/Layout";
+import Home from './Home/Home'
+import ItemPage from './ItemPage/ItemPage';
+import Cart from './Cart/Cart';
+
+import './App.css'
+import list from '../assets/products'
 
 // TODO: Incorporate OrderAmount component inside CartCard
 // TODO: Make React Context w/ loggedIn & setRoute
@@ -13,43 +16,39 @@ import list from '../products'
 
 function App() {
 
-  //* User auth, login & logout
-    const [loggedIn, setLoggedIn] = useState(false);
-
-    function logout() {
-      setLoggedIn(false)
-    }
-
-  //* Routing
-    const [route, setRoute] = useState('home');
+  //* STATE
+    const [loggedIn, setLoggedIn] = useState(false); // User auth, login & logout
+    const [route, setRoute] = useState('home'); // Routing
+    const [search, setSearch] = useState(''); // Searchbar value
+    const [items, setItems] = useState([]); // Store's products
+    const [currentItem, setCurrentItem] = useState({}); //
+    const [cart, setCart] = useState([]); // Shopping cart
 
 
-  //* Searchbar
-    const [search, setSearch] = useState('');
+  //* EFFECTS
+    // Fetch items from server
+    useEffect(() => {
+      setItems(list)
+    }, [])
+
     // Clear searchbar on route change
     useEffect(() => {
       setSearch('')
     }, [route])
 
+    
+  //* FUNCTIONS
 
-  //* Store's products
-    const [items, setItems] = useState([]);
-    // Fetch items from server
-    useEffect(() => {
-      // Fetch items from server
-      setItems(list)
-    }, [])
+    // Logout user
+    function logout() {
+      setLoggedIn(false)
+    }
 
-    const [currentItem, setCurrentItem] = useState({});
-
+    // View the clicked on item
     function viewItem(item) {
       setCurrentItem(item);
       setRoute('item');
     }
-   
-
-  //* Shopping cart
-    const [cart, setCart] = useState([]);
     
     // Adds or removes the item from the cart and sets its quantity value
     function handleCart(item, quantity) {

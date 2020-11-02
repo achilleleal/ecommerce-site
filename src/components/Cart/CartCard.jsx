@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import OrderAmount from './OrderAmount'
 
 export default function CartCard({ item, price, viewItem, handleCart }) {
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '../styles/OrderAmount.module.css'
+import styles from './OrderAmount.module.css'
 
 export default function OrderAmount({ amount, setAmount }) {
 

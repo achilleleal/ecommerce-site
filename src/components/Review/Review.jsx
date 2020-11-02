@@ -1,18 +1,19 @@
 import React from 'react';
 import luffy from './luffy.png'; //PLACEHOLDER
-import styles from '../styles/Review.module.css'
+import styles from './Review.module.css'
 
-export default function Review({ user, profileImg, rating, date, content }) {
+export default function Review({ review }) {
+
     return (
         <div className={`card ${styles.review}`}>
             <div className={styles.user}>
             <img src={luffy} alt='' className={`profile-image ${styles.pf_image}`}/>
-                <p>{user}</p>
+                <p>{review.user}</p>
             </div>
             <article className={styles.content}>
-                <h3>{rating}</h3>
-                <p>{content}</p>
-                <span>{date}</span>
+                <h3>{review.rating}</h3>
+                <p>{review.content}</p>
+                <span>{review.date}</span>
             </article>
         </div>
     )

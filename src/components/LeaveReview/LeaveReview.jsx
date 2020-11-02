@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import styles from '../styles/LeaveReview.module.css'
+import styles from './LeaveReview.module.css'
 
 export default function LeaveReview({ loggedIn, setRoute }) {
     
