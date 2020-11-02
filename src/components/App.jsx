@@ -10,7 +10,6 @@ import list from '../assets/products'
 
 // TODO: Incorporate OrderAmount component inside CartCard
 // TODO: Make React Context w/ loggedIn & setRoute
-// TODO: Not allow adding to cart items that are out of stock
 // TODO: Checkout
 
 

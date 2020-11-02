@@ -39,21 +39,25 @@ export default function ItemPage({ item, loggedIn, setRoute, stock, handleCart }
                         <h1>{price}</h1>
                     </div>
                     <div className={styles.cart_zone}>
-                        <button 
-                          className='btn'
-                          onClick={() => {
-                            loggedIn 
-                              ? updateCart()
-                              : setRoute('signin')
-                          }}
-                        >
-                            {!inCart ? 'Add to cart' : 'Remove from cart'}    
-                        </button>
-                        {!inCart && 
-                            <OrderAmount 
-                              amount={amount} 
-                              setAmount={setAmount} 
-                            />
+                        {Boolean(stock) &&
+                            <>
+                                <button 
+                                className='btn'
+                                onClick={() => {
+                                    loggedIn 
+                                    ? updateCart()
+                                    : setRoute('signin')
+                                }}
+                                >
+                                    {!inCart ? 'Add to cart' : 'Remove from cart'}    
+                                </button>
+                                {!inCart && 
+                                    <OrderAmount 
+                                    amount={amount} 
+                                    setAmount={setAmount} 
+                                    />
+                                }
+                            </>
                         }
                     </div>
                     <h3>Product Info</h3>
