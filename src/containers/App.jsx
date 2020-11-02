@@ -5,6 +5,12 @@ import ItemPage from './ItemPage';
 import Cart from './Cart';
 import list from '../products'
 
+// TODO: Incorporate OrderAmount component inside CartCard
+// TODO: Make React Context w/ loggedIn & setRoute
+// TODO: Not allow adding to cart items that are out of stock
+// TODO: Checkout
+
+
 function App() {
 
   //* User auth, login & logout
@@ -43,21 +49,20 @@ function App() {
    
 
   //* Shopping cart
-  const [cart, setCart] = useState([]);
-  
-  // Adds or removes the item from the cart, and sets its quantity value
-  function handleCart(item, quantity, setInCart) {
-    if (cart.includes(item)) {
-      cart.splice(cart.indexOf(item), 1);
-      item.inCart = false;
-      item.quantity = 0;
-    } else {
-      cart.push(item);
-      item.inCart = true;
-      item.cartQuantity = quantity;
+    const [cart, setCart] = useState([]);
+    
+    // Adds or removes the item from the cart and sets its quantity value
+    function handleCart(item, quantity) {
+      if (cart.includes(item)) {
+        cart.splice(cart.indexOf(item), 1);
+        item.inCart = false;
+        item.quantity = 0;
+      } else {
+        cart.push(item);
+        item.inCart = true;
+        item.cartQuantity = quantity;
+      }
     }
-    setInCart(prevInCart => !prevInCart)
-  }
 
   return (
     <Layout 

@@ -15,6 +15,11 @@ export default function ItemPage({ item, loggedIn, setRoute, stock, handleCart }
         setReviews(list)
     }, [])
 
+    function updateCart() {
+        handleCart(item, amount)
+        setInCart(prevInCart => !inCart)
+    }
+
 
     // Amount of item to be added to cart
     const [amount, setAmount] = useState(1);
@@ -36,7 +41,7 @@ export default function ItemPage({ item, loggedIn, setRoute, stock, handleCart }
                           className='btn'
                           onClick={() => {
                             loggedIn 
-                              ? handleCart(item, amount, setInCart)
+                              ? updateCart()
                               : setRoute('signin')
                           }}
                         >

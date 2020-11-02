@@ -1,5 +1,7 @@
 .cart {
     padding: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 .empty-cart {
@@ -16,9 +18,8 @@
 
 .cart-card {
     display: flex;
-    margin: 0 auto;
     margin-bottom: 0.5rem;
-    max-width: 600px;
+    transition: 500ms;
 }
 
 .cart-main {
@@ -42,4 +43,10 @@
     font-size: 1em;
     justify-content: flex-end;
     align-items: center;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.cart h1 {
+    margin: 1rem 0;
 }

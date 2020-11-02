@@ -1,19 +1,45 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import CartCard from '../components/CartCard'
 import '../styles/Cart.css'
 
 export default function Cart({ loggedIn, setRoute, cart, viewItem, handleCart }) {
     
+    // Remove $ sign from price to be able to multiply by the quantity
+    const format = price => Number(price.split('$')[0]).toFixed(2)
+
+    //Calculate total price
+    const calcTotal = () => cart.reduce((t, i) => t + (format(i.price) * i.cartQuantity), 0).toFixed(2)
+
+    const [total, setTotal] = useState(calcTotal())
+    const [refreshCart, setRefreshCart] = useState(false) //Refresh page on click. This way allows the user to undo deleting an item.
+
+    useEffect(() => {
+        setTotal(calcTotal())        
+    }, [refreshCart])
+
+
     if (loggedIn && cart.length) {
 
         return (
             <div className="cart">
-                {cart.map(item => 
-                    <CartCard 
-                        item={item}
-                        viewItem={() => viewItem(item)}
-                        handleCart={handleCart}
-                    />
-                )}
+                <div className="txt-center" style={{marginBottom: '1rem'}}>
+                    <button className="btn" onClick={() => setRefreshCart(prev => !prev)}>
+                        Refresh Cart
+                    </button>
+                </div>
+                
+                {cart.map((item, i)=>
+                        <CartCard
+                            key={i}
+                            item={item}
+                            price={format(item.price)}
+                            viewItem={() => viewItem(item)}
+                            handleCart={handleCart}
+                            setTotal={setTotal}
+                        />
+                    )
+                }
+                <h1>Total:{total}$</h1>
             </div>
         );
 
@@ -39,33 +65,4 @@ export default function Cart({ loggedIn, setRoute, cart, viewItem, handleCart })
             </div>
         )
     }
-}
-
-function CartCard({ item, viewItem, handleCart }) {
-
-    const [inCart, setInCart] = useState(true)
-
-    // Remove $ sign from price to be able to multiply by the quantity
-    const format = price => price.split('$')[0]
-
-    const { cartQuantity  } = item;
-
-    return(
-        <article className="card cart-card grow">
-            <div onClick={viewItem} className="pointer cart-main">
-                <img src={item.image} alt='' className="card-image" />
-                <div className="cart-info">
-                    <h2>{item.name} ({cartQuantity})</h2>
-                    <h3>{format(item.price) * cartQuantity}$</h3>
-                </div>
-            </div>
-            <button className="btn"
-              onClick={() => handleCart(item, cartQuantity, setInCart)}
-            >
-                {inCart
-                  ? 'X'
-                  : 'Undo'}
-            </button>
-        </article>
-    );
 }

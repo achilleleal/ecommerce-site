@@ -65,6 +65,10 @@ header, footer {
   cursor: pointer;
 }
 
+.m1 {
+  margin: 1rem;
+}
+
 .card {
   padding: 1rem;
   border-style: solid;
