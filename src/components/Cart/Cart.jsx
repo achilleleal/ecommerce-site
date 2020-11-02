@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import CartCard from './CartCard'
-import './Cart.css'
+import './Cart.sass'
 
 export default function Cart({ loggedIn, setRoute, cart, viewItem, handleCart }) {
     

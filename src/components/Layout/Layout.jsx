@@ -1,7 +1,7 @@
 import React from 'react'
 import Searchbar from './Searchbar/Searchbar';
 import Link from './Link'
-import './Layout.css'
+import './Layout.sass'
 
 export default function Layout({ children, setSearch, setRoute, logout }) {
 

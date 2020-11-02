@@ -5,7 +5,7 @@ import Home from './Home/Home'
 import ItemPage from './ItemPage/ItemPage';
 import Cart from './Cart/Cart';
 
-import './App.css'
+import './App.sass'
 import list from '../assets/products'
 
 // TODO: Incorporate OrderAmount component inside CartCard

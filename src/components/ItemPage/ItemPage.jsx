@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+
 import OrderAmount from '../OrderAmount/OrderAmount'
 import Review from '../Review/Review'
 import LeaveReview from '../LeaveReview/LeaveReview'
-import styles from './ItemPage.module.css'
+
+import styles from './ItemPage.module.sass'
 import list from '../../assets/reviews'
 
 export default function ItemPage({ item, loggedIn, setRoute, stock, handleCart }) {
