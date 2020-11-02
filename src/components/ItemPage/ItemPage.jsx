@@ -6,6 +6,7 @@ import LeaveReview from '../LeaveReview/LeaveReview'
 
 import styles from './ItemPage.module.sass'
 import list from '../../assets/reviews'
+import chair from '../../assets/chair.png';
 
 export default function ItemPage({ item, loggedIn, setRoute, stock, handleCart }) {
     
@@ -32,7 +33,9 @@ export default function ItemPage({ item, loggedIn, setRoute, stock, handleCart }
         <div className={styles.page}>
 
             <section className={`card ${styles.card}`}>
-                <img src={image} alt=''/>
+                <div className={styles.img_container}>
+                    <img src={chair} alt=''/>
+                </div>
                 <article>
                     <div className={styles.head}>
                         <h1>{name}</h1>

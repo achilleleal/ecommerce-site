@@ -2,7 +2,7 @@ export default [
     {
         id: 1,
         name: 'Chair',
-        image: '',
+        image: './chair.png',
         price: '19.99$',
         description: "Lorem ipsum dolor sit amet",
         stock: 15,
@@ -12,7 +12,7 @@ export default [
     {
         id: 2,
         name: 'Table',
-        image: '',
+        image: './chair.png',
         price: '39.99$',
         description: "Lorem ipsum dolor sit amet",
         stock: 0,
@@ -22,7 +22,7 @@ export default [
     {
         id: 3,
         name: 'Lamp',
-        image: '',
+        image: './chair.png',
         price: '29.99$',
         description: "Lorem ipsum dolor sit amet",
         stock: 15,
@@ -32,7 +32,7 @@ export default [
     {
         id: 1,
         name: 'Chair',
-        image: '',
+        image: './chair.png',
         price: '19.99$',
         description: "Lorem ipsum dolor sit amet",
         stock: 15,
@@ -42,7 +42,7 @@ export default [
     {
         id: 2,
         name: 'Table',
-        image: '',
+        image: './chair.png',
         price: '39.99$',
         description: "Lorem ipsum dolor sit amet",
         stock: 15,
@@ -52,7 +52,7 @@ export default [
     {
         id: 3,
         name: 'Lamp',
-        image: '',
+        image: './chair.png',
         price: '29.99$',
         description: "Lorem ipsum dolor sit amet",
         stock: 15,

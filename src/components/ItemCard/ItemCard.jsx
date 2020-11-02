@@ -1,16 +1,22 @@
 import React from 'react'
+import chair from '../../assets/chair.png' //placeholder
 
-export default function ItemCard({ name, price, image, viewItem, inCart }) {
+export default function ItemCard({ name, price, image, stock, viewItem, inCart }) {
     return (
         <article className="card grow pointer" onClick={viewItem}>
-            <img src={image} alt='' className="card_image" />
+            <div className="card-image">
+                <img src={chair} alt='' />
+            </div>
             <hr />
             <div className="flex between center-y">
                 <div>
                     <h2>{name}</h2>
                     <h3>{price}</h3>
                 </div>
-                <h3 className="ok">{inCart ? 'In cart' : ''}</h3>
+                <p className={stock ? 'ok' : 'err'}>
+                    {inCart && 'In cart'}
+                    {stock ? '' : 'Out of stock'}
+                </p>
             </div>
         </article>
     )

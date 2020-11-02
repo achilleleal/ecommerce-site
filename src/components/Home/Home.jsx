@@ -12,6 +12,7 @@ export default function Home({ items, viewItem }) {
                       name={item.name}
                       price={item.price}
                       image={item.image}
+                      stock={item.stock}
                       viewItem={() => viewItem(item)}
                       inCart={item.inCart}
                     />
