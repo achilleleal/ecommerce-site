@@ -3,7 +3,13 @@ import Searchbar from './Searchbar/Searchbar';
 import Link from './Link'
 import './Layout.sass'
 
-export default function Layout({ children, setSearch, setRoute, logout }) {
+export default function Layout({ children, setSearch, setRoute, loggedIn, logOut  }) {
+
+    function handleUser() {
+        !loggedIn 
+          ? setRoute('auth')
+          : logOut()
+    }
 
     return (
         <>
@@ -20,23 +26,25 @@ export default function Layout({ children, setSearch, setRoute, logout }) {
                           image=""
                           onClick={() => setRoute('cart')}
                         />
+                        {loggedIn &&
+                          <Link 
+                            to="Profile"
+                            image=""
+                            onClick={() => setRoute('profile')}
+                          />
+                        }
                         <Link 
-                          to="Profile"
+                          to={loggedIn ? 'Log Out' : 'Log In'}
                           image=""
-                          onClick={() => setRoute('profile')}
-                        />
-                        <Link 
-                          to="Logout"
-                          image=""
-                          onClick={() => logout()}
+                          onClick={handleUser}
                         />
                     </ul>
                 </nav>
                 <Searchbar setSearch={setSearch} />
             </header>
-            <div className="page">
+            <main className="page">
                 {children}
-            </div>
+            </main>
             <footer>
                 <p>Made with love by Sebastián Leal. 2020.</p>
             </footer>

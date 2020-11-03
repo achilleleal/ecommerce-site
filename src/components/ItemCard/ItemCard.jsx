@@ -13,7 +13,7 @@ export default function ItemCard({ name, price, image, stock, viewItem, inCart }
                     <h2>{name}</h2>
                     <h3>{price}</h3>
                 </div>
-                <p className={stock ? 'ok' : 'err'}>
+                <p className={`txt-center ${stock ? 'ok' : 'err'}`}>
                     {inCart && 'In cart'}
                     {stock ? '' : 'Out of stock'}
                 </p>

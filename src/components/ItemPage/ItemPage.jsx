@@ -41,28 +41,39 @@ export default function ItemPage({ item, loggedIn, setRoute, stock, handleCart }
                         <h1>{name}</h1>
                         <h1>{price}</h1>
                     </div>
-                    <div className={styles.cart_zone}>
-                        {Boolean(stock) &&
-                            <>
-                                <button 
-                                className='btn'
-                                onClick={() => {
-                                    loggedIn 
-                                    ? updateCart()
-                                    : setRoute('signin')
-                                }}
-                                >
-                                    {!inCart ? 'Add to cart' : 'Remove from cart'}    
-                                </button>
-                                {!inCart && 
-                                    <OrderAmount 
-                                    amount={amount} 
-                                    setAmount={setAmount} 
-                                    />
-                                }
-                            </>
-                        }
-                    </div>
+                    {loggedIn 
+                      ? <div className={styles.cart_zone}>
+                            {Boolean(stock)
+                                &&   <>
+                                        <button 
+                                        className='btn'
+                                        onClick={() => {
+                                            loggedIn 
+                                            ? updateCart()
+                                            : setRoute('signin')
+                                        }}
+                                        >
+                                            {!inCart ? 'Add to cart' : 'Remove from cart'}    
+                                        </button>
+                                        {!inCart && 
+                                            <OrderAmount 
+                                            amount={amount} 
+                                            setAmount={setAmount} 
+                                            />
+                                        }
+                                    </>
+                            }
+                        </div>
+                      : <div className="flex between center-y">
+                            <p>You must be logged in to add items to your cart.</p>
+                            <button 
+                              className="btn m1"
+                              onClick={() => setRoute('auth')}
+                            >
+                                Log In
+                            </button>
+                        </div>
+                    }
                     <h3>Product Info</h3>
                     <p className={stock ? 'ok' : 'err'}>
                         {stock 

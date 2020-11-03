@@ -57,7 +57,7 @@ export default function Cart({ loggedIn, setRoute, cart, viewItem, handleCart })
                     : <>
                         <h2>You must be logged in to see your cart</h2>
                         <button className='btn'
-                        onClick={() => setRoute('login')}>
+                        onClick={() => setRoute('auth')}>
                             Log In
                         </button>
                       </>

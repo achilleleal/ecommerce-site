@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
 import Layout from "./Layout/Layout";
-import Home from './Home/Home'
+import Home from './Home/Home';
 import ItemPage from './ItemPage/ItemPage';
+import Auth from './Auth/Auth';
 import Cart from './Cart/Cart';
 
 import './App.sass'
@@ -12,12 +13,19 @@ import list from '../assets/products'
 // TODO: Make React Context w/ loggedIn & setRoute
 // TODO: Checkout
 
+const userProfile = {
+  name: '',
+  email: '',
+  password: ''
+}
 
 function App() {
 
   //* STATE
+
+    const [user, setUser] = useState(userProfile);
     const [loggedIn, setLoggedIn] = useState(false); // User auth, login & logout
-    const [route, setRoute] = useState('home'); // Routing
+    const [route, setRoute] = useState('auth'); // Routing
     const [search, setSearch] = useState(''); // Searchbar value
     const [items, setItems] = useState([]); // Store's products
     const [currentItem, setCurrentItem] = useState({}); //
@@ -38,11 +46,6 @@ function App() {
     
   //* FUNCTIONS
 
-    // Logout user
-    function logout() {
-      setLoggedIn(false)
-    }
-
     // View the clicked on item
     function viewItem(item) {
       setCurrentItem(item);
@@ -62,12 +65,14 @@ function App() {
       }
     }
 
+    console.log(user)
+
   return (
     <Layout 
       setRoute={setRoute} 
       setSearch={setSearch} 
       loggedIn={loggedIn} 
-      logout={() => setLoggedIn(!loggedIn)}
+      logOut={() => setLoggedIn(false)}
     >
       {/* PAGE ROUTING: When route matches, it returns the component.*/}
 
@@ -86,6 +91,14 @@ function App() {
               handleCart={handleCart}
               stock={currentItem.stock}
             />
+        }
+
+        {route === 'auth' &&
+          <Auth
+            signIn={() => setLoggedIn(true)}
+            setUser={setUser}
+            setRoute={setRoute}
+          />
         }
 
         {route === 'cart' && 

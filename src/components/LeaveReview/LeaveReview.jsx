@@ -35,7 +35,7 @@ export default function LeaveReview({ loggedIn, setRoute }) {
                         <p>You must be logged in to leave a review.</p>
                         <button 
                           className={`btn ${styles.signin}`} 
-                          onClick={() => setRoute('signin')}
+                          onClick={() => setRoute('auth')}
                         >
                             Log in
                         </button>

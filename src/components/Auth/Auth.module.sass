@@ -1,0 +1,39 @@
+@use '../base'
+
+.auth
+    padding: 2rem
+    max-width: 600px
+    margin: 2rem auto
+
+    @media (max-width: 700px)
+        margin: 2rem 5%
+
+    p
+        text-align: center
+
+    span
+        color: base.$secondary
+        text-decoration: underline
+        cursor: pointer
+        margin-left: 5px 
+        
+        &:hover
+            transition: 100ms
+            color: base.$secondary-light
+
+    button
+        margin-top: .5rem
+
+.title
+    text-align: center
+    margin: 1rem
+
+.auth_input
+    border: solid 1px
+    border-color: base.$primary-light
+    border-radius: .5rem
+    padding: .5rem .5rem
+    width: 95%
+    max-width: 1000px
+    font-size: 1.1em
+    margin: .5rem auto 1rem auto
