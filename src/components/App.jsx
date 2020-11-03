@@ -13,7 +13,7 @@ import list from '../assets/products'
 // TODO: Make React Context w/ loggedIn & setRoute
 // TODO: Checkout
 
-const userProfile = {
+const blankUser = {
   name: '',
   email: '',
   password: ''
@@ -23,9 +23,8 @@ function App() {
 
   //* STATE
 
-    const [user, setUser] = useState(userProfile);
-    const [loggedIn, setLoggedIn] = useState(false); // User auth, login & logout
-    const [route, setRoute] = useState('auth'); // Routing
+    const [user, setUser] = useState(blankUser);
+    const [route, setRoute] = useState('home'); // Routing
     const [search, setSearch] = useState(''); // Searchbar value
     const [items, setItems] = useState([]); // Store's products
     const [currentItem, setCurrentItem] = useState({}); //
@@ -44,7 +43,9 @@ function App() {
     }, [route])
 
     
-  //* FUNCTIONS
+  //* LOGIC
+
+    const filteredItems = items.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
 
     // View the clicked on item
     function viewItem(item) {
@@ -65,20 +66,18 @@ function App() {
       }
     }
 
-    console.log(user)
-
   return (
     <Layout 
       setRoute={setRoute} 
       setSearch={setSearch} 
-      loggedIn={loggedIn} 
-      logOut={() => setLoggedIn(false)}
+      loggedIn={user.email} 
+      logOut={() => setUser(blankUser)}
     >
       {/* PAGE ROUTING: When route matches, it returns the component.*/}
 
         {route === 'home' && 
             <Home 
-              items={items} 
+              items={filteredItems} 
               viewItem={viewItem}
             />
         }
@@ -86,7 +85,7 @@ function App() {
         {route === 'item' && 
             <ItemPage 
               item={currentItem} 
-              loggedIn={loggedIn} 
+              loggedIn={user.email} 
               setRoute={setRoute}
               handleCart={handleCart}
               stock={currentItem.stock}
@@ -95,7 +94,6 @@ function App() {
 
         {route === 'auth' &&
           <Auth
-            signIn={() => setLoggedIn(true)}
             setUser={setUser}
             setRoute={setRoute}
           />
@@ -103,7 +101,7 @@ function App() {
 
         {route === 'cart' && 
             <Cart 
-              loggedIn={loggedIn}
+              loggedIn={user.email}
               cart={cart} 
               viewItem={viewItem}
               handleCart={handleCart}

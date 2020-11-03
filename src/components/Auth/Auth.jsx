@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import LogIn from './LogIn'
 import SignUp from './SignUp'
 
-export default function Auth({ signIn, setUser, setRoute }) {
+export default function Auth({ setUser, setRoute }) {
     
     const [hasAccount, setHasAccount] = useState(true);
 
@@ -13,7 +13,6 @@ export default function Auth({ signIn, setUser, setRoute }) {
           email: email,
           password: password
         })
-        signIn()
         setRoute('home')
       }
     }
