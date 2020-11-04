@@ -8,16 +8,16 @@ import Cart from './Cart/Cart';
 import Profile from './Profile/Profile'
 
 import './App.sass'
-import list from '../assets/products'
 
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
+import firebaseConfig from './firebaseConfig';
 
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 
-import firebaseConfig from './firebaseConfig';
+
 
 firebase.initializeApp(firebaseConfig)
 
@@ -30,11 +30,12 @@ function App() {
   //* STATE
 
     const [user] = useAuthState(auth);
+
+    const itemsRef = firestore.collection('items'); // Firebase collection that contains the store products
+    const [items] = useCollectionData(itemsRef); // 
+
     const [route, setRoute] = useState('home'); // Routing
     const [search, setSearch] = useState(''); // Searchbar value
-    // const [items, setItems] = useState([]); // Store's products
-    const itemsRef = firestore.collection('items');
-    const [items] = useCollectionData(itemsRef)
 
     const [currentItem, setCurrentItem] = useState({});
     const [recentlyViewed, setRecentlyViewed] = useState([]); // Last 4 viewed items
@@ -42,10 +43,6 @@ function App() {
 
     console.log(items)
   //* EFFECTS
-    // Fetch items from server
-    // useEffect(() => {
-    //   setItems(list)
-    // }, [])
 
     // Clear searchbar on route change
     useEffect(() => {
@@ -53,25 +50,20 @@ function App() {
     }, [route])
 
     // Adds the last viewed item to recentlyViewed & deletes the last one if there are more than 4 items
-    // useEffect(() => {
-    //   if (currentItem.name && !recentlyViewed.includes(currentItem)) {
-    //     recentlyViewed.length >= 4 && recentlyViewed.pop()
-    //     recentlyViewed.unshift(currentItem)
-    //   }
-    // }, [currentItem])
+    useEffect(() => {
+      if (currentItem.name && !recentlyViewed.includes(currentItem)) {
+        recentlyViewed.length >= 4 && recentlyViewed.pop()
+        recentlyViewed.unshift(currentItem)
+      }
+    }, [currentItem])
   
   //* LOGIC
 
-    //! FIREBASE
-
-      function signInWithGoogle() {
-        const provider = new firebase.auth.GoogleAuthProvider()
-        auth.signInWithPopup(provider)
-      }
-
-      
-
-    //! END FIREBASE
+    // Firebase
+    function signInWithGoogle() {
+      const provider = new firebase.auth.GoogleAuthProvider()
+      auth.signInWithPopup(provider)
+    }
 
     const filterItems = arr => arr.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
 
@@ -114,8 +106,8 @@ function App() {
         {route === 'item' && 
             <ItemPage 
               item={currentItem} 
-              loggedIn={user} 
-              setRoute={setRoute}
+              user={user} 
+              signIn={signInWithGoogle}
               handleCart={handleCart}
               stock={currentItem.stock}
             />
@@ -123,11 +115,11 @@ function App() {
 
         {route === 'cart' && 
             <Cart 
-              loggedIn={user}
+              user={user}
+              signIn={signInWithGoogle}
               cart={cart} 
               viewItem={viewItem}
               handleCart={handleCart}
-              setRoute={setRoute}
             />
         }
 {/* 

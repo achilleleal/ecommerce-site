@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styles from './LeaveReview.module.sass'
 
-export default function LeaveReview({ loggedIn, setRoute }) {
+export default function LeaveReview({ user, signIn }) {
     
     const [review, setReview] = useState('')
 
@@ -13,7 +13,7 @@ export default function LeaveReview({ loggedIn, setRoute }) {
         <div className={styles.main}>
             <h2 className={styles.title}>Leave a review:</h2>
             <div className={styles.review_zone}>
-                { loggedIn 
+                { user 
                     ? <>
                         <textarea type='text' 
                             placeholder="Leave a review" 
@@ -35,9 +35,9 @@ export default function LeaveReview({ loggedIn, setRoute }) {
                         <p>You must be logged in to leave a review.</p>
                         <button 
                           className={`btn ${styles.signin}`} 
-                          onClick={() => setRoute('auth')}
+                          onClick={signIn}
                         >
-                            Log in
+                            Sign In
                         </button>
                         </>
                 }

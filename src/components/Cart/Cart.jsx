@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import CartCard from './CartCard'
 import './Cart.sass'
 
-export default function Cart({ loggedIn, setRoute, cart, viewItem, handleCart }) {
+export default function Cart({ user, signIn, cart, viewItem, handleCart }) {
     
     // Remove $ sign from price and turn into number
     const format = price => Number(price.slice(0, - 1))
@@ -19,7 +19,7 @@ export default function Cart({ loggedIn, setRoute, cart, viewItem, handleCart })
     }, [refreshCart])
 
 
-    if (loggedIn && cart.length) {
+    if (user && cart.length) {
 
         return (
             <div className="cart">
@@ -48,7 +48,7 @@ export default function Cart({ loggedIn, setRoute, cart, viewItem, handleCart })
         return (
             <div className="empty-cart">
                 <div className="txt-center">
-                {loggedIn 
+                {user 
                     ? <>
                         <h2>Your cart is empty!</h2>
                         <p> Go browse some products :)</p>
@@ -57,7 +57,7 @@ export default function Cart({ loggedIn, setRoute, cart, viewItem, handleCart })
                     : <>
                         <h2>You must be logged in to see your cart</h2>
                         <button className='btn'
-                        onClick={() => setRoute('auth')}>
+                        onClick={signIn}>
                             Log In
                         </button>
                       </>

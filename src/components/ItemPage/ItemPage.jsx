@@ -7,7 +7,7 @@ import LeaveReview from '../LeaveReview/LeaveReview'
 import styles from './ItemPage.module.sass'
 import list from '../../assets/reviews'
 
-export default function ItemPage({ item, loggedIn, setRoute, stock, handleCart }) {
+export default function ItemPage({ item, user, signIn, setRoute, stock, handleCart }) {
     
     const { image, name, price, description } = item;
 
@@ -40,14 +40,14 @@ export default function ItemPage({ item, loggedIn, setRoute, stock, handleCart }
                         <h1>{name}</h1>
                         <h1>{price}</h1>
                     </div>
-                    {loggedIn 
+                    {user 
                       ? <div className={styles.cart_zone}>
                             {Boolean(stock)
                                 &&   <>
                                         <button 
                                         className='btn'
                                         onClick={() => {
-                                            loggedIn 
+                                            user 
                                             ? updateCart()
                                             : setRoute('signin')
                                         }}
@@ -64,12 +64,12 @@ export default function ItemPage({ item, loggedIn, setRoute, stock, handleCart }
                             }
                         </div>
                       : <div className="flex between center-y">
-                            <p>You must be logged in to add items to your cart.</p>
+                            <p>You must be signed in to add items to your cart.</p>
                             <button 
                               className="btn m1"
-                              onClick={() => setRoute('auth')}
+                              onClick={signIn}
                             >
-                                Log In
+                                Sign In
                             </button>
                         </div>
                     }
@@ -86,8 +86,8 @@ export default function ItemPage({ item, loggedIn, setRoute, stock, handleCart }
 
             <div>
                 <LeaveReview 
-                  loggedIn={loggedIn} 
-                  setRoute={setRoute}
+                  user={user} 
+                  signIn={signIn}
                 />
                 <h1>User reviews</h1>
                 <div>
