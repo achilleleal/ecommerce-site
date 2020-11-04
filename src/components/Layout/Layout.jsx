@@ -28,9 +28,9 @@ export default function Layout({ children, setSearch, setRoute, user, signIn, si
                         />
                         {user &&
                           <Link 
-                            to="Profile"
+                            to="Sell"
                             image=""
-                            onClick={() => setRoute('profile')}
+                            onClick={() => setRoute('sell')}
                           />
                         }
                         <Link 

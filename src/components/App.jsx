@@ -3,11 +3,10 @@ import React, { useState, useEffect } from 'react';
 import Layout from "./Layout/Layout";
 import Home from './Home/Home';
 import ItemPage from './ItemPage/ItemPage';
-import Auth from './Auth/Auth';
 import Cart from './Cart/Cart';
-import Profile from './Profile/Profile'
+import SellProduct from './SellProduct/SellProduct';
 
-import './App.sass'
+import './App.sass';
 
 import firebase from 'firebase/app';
 import 'firebase/firestore';
@@ -34,9 +33,8 @@ function App() {
     const itemsRef = firestore.collection('items'); // Firebase collection that contains the store products
     const [items] = useCollectionData(itemsRef); // 
 
-    const [route, setRoute] = useState('home'); // Routing
+    const [route, setRoute] = useState('sell'); // Routing
     const [search, setSearch] = useState(''); // Searchbar value
-
     const [currentItem, setCurrentItem] = useState({});
     const [recentlyViewed, setRecentlyViewed] = useState([]); // Last 4 viewed items
     const [cart, setCart] = useState([]); // Shopping cart
@@ -122,13 +120,14 @@ function App() {
               handleCart={handleCart}
             />
         }
-{/* 
-        {route === 'profile' && 
-            <Profile
-              user={user}
-              recentlyViewed={recentlyViewed}
-              viewItem={viewItem}
-            />} */}
+
+        {route === 'sell' && 
+            <SellProduct
+              auth={auth}
+              itemsRef={itemsRef}
+              setRoute={setRoute}
+            />
+        }
     </Layout>
   );
 }
