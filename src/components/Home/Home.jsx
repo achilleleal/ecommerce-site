@@ -6,7 +6,8 @@ export default function Home({ items, viewItem }) {
 
     return (
         <div className="home">
-            {items.map((item, i) => 
+            {items.length 
+                ? items.map((item, i) => 
                     <ItemCard 
                       key={i}
                       name={item.name}
@@ -14,9 +15,9 @@ export default function Home({ items, viewItem }) {
                       image={item.image}
                       stock={item.stock}
                       viewItem={() => viewItem(item)}
-                      inCart={item.inCart}
                     />
                 )
+                :<p>Loading</p>
             }
         </div>
     )

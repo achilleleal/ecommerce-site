@@ -1,14 +1,13 @@
 import React from 'react'
-import chair from '../../assets/chair.png' //placeholder
+import styles from './ItemCard.module.sass'
 
 export default function ItemCard({ name, price, image, stock, viewItem, inCart }) {
     return (
-        <article className="card grow pointer" onClick={viewItem}>
-            <div className="card-image">
-                <img src={chair} alt='' />
+        <article className={`card grow flex col center-x center-y pointer ${styles.card}`} onClick={viewItem}>
+            <div className={styles.img_container}>
+                <img src={image} alt=''/>
             </div>
-            <hr />
-            <div className="flex between center-y">
+            <div className={styles.info}>
                 <div>
                     <h2>{name}</h2>
                     <h3>{price}</h3>

@@ -10,35 +10,42 @@ import Profile from './Profile/Profile'
 import './App.sass'
 import list from '../assets/products'
 
-// TODO: Incorporate OrderAmount component inside CartCard
-// TODO: Make React Context w/ loggedIn & setRoute
-// TODO: Checkout
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import 'firebase/auth';
 
-const blankUser = {
-  name: 'abcdef',
-  email: 'a@a.com',
-  password: '123456789',
-  profileImg: ''
-}
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useCollectionData } from 'react-firebase-hooks/firestore'
+
+import firebaseConfig from './firebaseConfig';
+
+firebase.initializeApp(firebaseConfig)
+
+const auth = firebase.auth()
+const firestore = firebase.firestore();
+
 
 function App() {
 
   //* STATE
 
-    const [user, setUser] = useState(blankUser);
+    const [user] = useAuthState(auth);
     const [route, setRoute] = useState('home'); // Routing
     const [search, setSearch] = useState(''); // Searchbar value
-    const [items, setItems] = useState([]); // Store's products
+    // const [items, setItems] = useState([]); // Store's products
+    const itemsRef = firestore.collection('items');
+    const [items] = useCollectionData(itemsRef)
+
     const [currentItem, setCurrentItem] = useState({});
     const [recentlyViewed, setRecentlyViewed] = useState([]); // Last 4 viewed items
     const [cart, setCart] = useState([]); // Shopping cart
 
-
+    console.log(items)
   //* EFFECTS
     // Fetch items from server
-    useEffect(() => {
-      setItems(list)
-    }, [])
+    // useEffect(() => {
+    //   setItems(list)
+    // }, [])
 
     // Clear searchbar on route change
     useEffect(() => {
@@ -46,15 +53,25 @@ function App() {
     }, [route])
 
     // Adds the last viewed item to recentlyViewed & deletes the last one if there are more than 4 items
-    useEffect(() => {
-      if (currentItem.name && !recentlyViewed.includes(currentItem)) {
-        recentlyViewed.length >= 4 && recentlyViewed.pop()
-        recentlyViewed.unshift(currentItem)
-      }
-    }, [currentItem])
-
-    
+    // useEffect(() => {
+    //   if (currentItem.name && !recentlyViewed.includes(currentItem)) {
+    //     recentlyViewed.length >= 4 && recentlyViewed.pop()
+    //     recentlyViewed.unshift(currentItem)
+    //   }
+    // }, [currentItem])
+  
   //* LOGIC
+
+    //! FIREBASE
+
+      function signInWithGoogle() {
+        const provider = new firebase.auth.GoogleAuthProvider()
+        auth.signInWithPopup(provider)
+      }
+
+      
+
+    //! END FIREBASE
 
     const filterItems = arr => arr.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
 
@@ -77,20 +94,19 @@ function App() {
       }
     }
 
-    console.log(recentlyViewed)
-
   return (
     <Layout 
       setRoute={setRoute} 
       setSearch={setSearch} 
-      loggedIn={user.email} 
-      logOut={() => setUser(blankUser)}
+      user={auth.currentUser}
+      signIn={signInWithGoogle} 
+      signOut={() => auth.signOut()}
     >
       {/* PAGE ROUTING: When route matches, it returns the component.*/}
 
         {route === 'home' && 
             <Home 
-              items={filterItems(items)} 
+              items={items || []} 
               viewItem={viewItem}
             />
         }
@@ -98,37 +114,29 @@ function App() {
         {route === 'item' && 
             <ItemPage 
               item={currentItem} 
-              loggedIn={user.email} 
+              loggedIn={user} 
               setRoute={setRoute}
               handleCart={handleCart}
               stock={currentItem.stock}
             />
         }
 
-        {route === 'auth' &&
-          <Auth
-            setUser={setUser}
-            setRoute={setRoute}
-          />
-        }
-
         {route === 'cart' && 
             <Cart 
-              loggedIn={user.email}
+              loggedIn={user}
               cart={cart} 
               viewItem={viewItem}
               handleCart={handleCart}
               setRoute={setRoute}
             />
         }
-
+{/* 
         {route === 'profile' && 
             <Profile
               user={user}
-              setUser={setUser}
               recentlyViewed={recentlyViewed}
               viewItem={viewItem}
-            />}
+            />} */}
     </Layout>
   );
 }

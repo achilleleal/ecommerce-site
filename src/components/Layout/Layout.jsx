@@ -3,12 +3,12 @@ import Searchbar from './Searchbar/Searchbar';
 import Link from './Link'
 import './Layout.sass'
 
-export default function Layout({ children, setSearch, setRoute, loggedIn, logOut  }) {
+export default function Layout({ children, setSearch, setRoute, user, signIn, signOut  }) {
 
     function handleUser() {
-        !loggedIn 
-          ? setRoute('auth')
-          : logOut()
+        !user 
+          ? signIn()
+          : signOut()
     }
 
     return (
@@ -26,7 +26,7 @@ export default function Layout({ children, setSearch, setRoute, loggedIn, logOut
                           image=""
                           onClick={() => setRoute('cart')}
                         />
-                        {loggedIn &&
+                        {user &&
                           <Link 
                             to="Profile"
                             image=""
@@ -34,7 +34,7 @@ export default function Layout({ children, setSearch, setRoute, loggedIn, logOut
                           />
                         }
                         <Link 
-                          to={loggedIn ? 'Log Out' : 'Log In'}
+                          to={user ? 'Sign Out' : 'Sign In'}
                           image=""
                           onClick={handleUser}
                         />
