@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import chair from '../../assets/chair.png'
 
 export default function CartCard({ item, price, viewItem, handleCart }) {
 
@@ -11,7 +10,7 @@ export default function CartCard({ item, price, viewItem, handleCart }) {
         <article className="card cart-card grow">
             <div onClick={viewItem} className="pointer cart-main">
                 <div className="cart-img">
-                    <img src={chair} alt=''/>
+                    <img src={item.image} alt=''/>
                 </div>
                 <div className="cart-info">
                     <h2>{item.name} ({cartQuantity})</h2>

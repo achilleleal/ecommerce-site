@@ -1,5 +1,5 @@
 import React from 'react';
-import defaultPf from '../../assets/user.png' //PLACEHOLDER
+import defaultPf from '../../assets/user.png'
 import styles from './Review.module.sass'
 
 export default function Review({ review }) {
