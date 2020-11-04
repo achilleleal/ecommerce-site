@@ -1,0 +1,52 @@
+@use '../base'
+
+.profile
+    margin: 0 auto
+    padding: 2rem
+    max-width: 1000px
+
+    .profile-image
+        $size: 30vw
+        $max: 200px
+
+        width: $size
+        height: $size
+        max-width: $max
+        max-height: $max
+
+        border: solid 1px 
+        border-color: base.$primary-lightest
+
+    h1, p
+        margin: 1rem auto
+
+    .recents
+        padding: 1rem 0
+        display: grid
+        grid-template-columns: repeat(4, 1fr)
+        gap: 1rem
+
+        @media (max-width: 800px)
+            grid-template-columns: repeat(2, 1fr)
+            padding: 1rem 2rem
+
+        @media (max-width: 500px)
+            grid-template-columns: 1fr
+            padding: 1rem 2rem
+
+    .settings
+
+        button.delete
+            border-radius: 5rem
+            border: solid 1px red
+            color: darkred
+            background: transparent
+            font-size: 0.9em
+            padding: .5rem 1rem
+            margin-top: 10rem
+
+            &:hover
+                transition: 500ms
+                transform: scale(1.05)
+                background: lightred
+                color: white

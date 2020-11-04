@@ -5,6 +5,7 @@ import Home from './Home/Home';
 import ItemPage from './ItemPage/ItemPage';
 import Auth from './Auth/Auth';
 import Cart from './Cart/Cart';
+import Profile from './Profile/Profile'
 
 import './App.sass'
 import list from '../assets/products'
@@ -14,9 +15,10 @@ import list from '../assets/products'
 // TODO: Checkout
 
 const blankUser = {
-  name: '',
-  email: '',
-  password: ''
+  name: 'abcdef',
+  email: 'a@a.com',
+  password: '123456789',
+  profileImg: ''
 }
 
 function App() {
@@ -27,7 +29,8 @@ function App() {
     const [route, setRoute] = useState('home'); // Routing
     const [search, setSearch] = useState(''); // Searchbar value
     const [items, setItems] = useState([]); // Store's products
-    const [currentItem, setCurrentItem] = useState({}); //
+    const [currentItem, setCurrentItem] = useState({});
+    const [recentlyViewed, setRecentlyViewed] = useState([]); // Last 4 viewed items
     const [cart, setCart] = useState([]); // Shopping cart
 
 
@@ -42,10 +45,18 @@ function App() {
       setSearch('')
     }, [route])
 
+    // Adds the last viewed item to recentlyViewed & deletes the last one if there are more than 4 items
+    useEffect(() => {
+      if (currentItem.name && !recentlyViewed.includes(currentItem)) {
+        recentlyViewed.length >= 4 && recentlyViewed.pop()
+        recentlyViewed.unshift(currentItem)
+      }
+    }, [currentItem])
+
     
   //* LOGIC
 
-    const filteredItems = items.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
+    const filterItems = arr => arr.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
 
     // View the clicked on item
     function viewItem(item) {
@@ -66,6 +77,8 @@ function App() {
       }
     }
 
+    console.log(recentlyViewed)
+
   return (
     <Layout 
       setRoute={setRoute} 
@@ -77,7 +90,7 @@ function App() {
 
         {route === 'home' && 
             <Home 
-              items={filteredItems} 
+              items={filterItems(items)} 
               viewItem={viewItem}
             />
         }
@@ -109,7 +122,13 @@ function App() {
             />
         }
 
-        {/* {route === 'profile' && <Profile />} */}
+        {route === 'profile' && 
+            <Profile
+              user={user}
+              setUser={setUser}
+              recentlyViewed={recentlyViewed}
+              viewItem={viewItem}
+            />}
     </Layout>
   );
 }
