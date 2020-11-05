@@ -17,12 +17,13 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 
 
-
 firebase.initializeApp(firebaseConfig)
 
 const auth = firebase.auth()
 const firestore = firebase.firestore();
 
+const FirestoreContext = React.createContext()
+const AuthContext = React.createContext()
 
 function App() {
 
@@ -33,31 +34,23 @@ function App() {
     const itemsRef = firestore.collection('items'); // Firebase collection that contains the store products
     const [items] = useCollectionData(itemsRef); // 
 
-    const [route, setRoute] = useState('sell'); // Routing
+    const [route, setRoute] = useState('home'); // Routing
     const [search, setSearch] = useState(''); // Searchbar value
     const [currentItem, setCurrentItem] = useState({});
-    const [recentlyViewed, setRecentlyViewed] = useState([]); // Last 4 viewed items
     const [cart, setCart] = useState([]); // Shopping cart
 
-    console.log(items)
+    console.log(itemsRef)
+
   //* EFFECTS
 
     // Clear searchbar on route change
     useEffect(() => {
       setSearch('')
     }, [route])
-
-    // Adds the last viewed item to recentlyViewed & deletes the last one if there are more than 4 items
-    useEffect(() => {
-      if (currentItem.name && !recentlyViewed.includes(currentItem)) {
-        recentlyViewed.length >= 4 && recentlyViewed.pop()
-        recentlyViewed.unshift(currentItem)
-      }
-    }, [currentItem])
   
   //* LOGIC
 
-    // Firebase
+    // Firebase signin
     function signInWithGoogle() {
       const provider = new firebase.auth.GoogleAuthProvider()
       auth.signInWithPopup(provider)
@@ -85,6 +78,7 @@ function App() {
     }
 
   return (
+    <FirestoreContext.Provider value={firestore}>
     <Layout 
       setRoute={setRoute} 
       setSearch={setSearch} 
@@ -103,8 +97,12 @@ function App() {
 
         {route === 'item' && 
             <ItemPage 
-              item={currentItem} 
-              user={user} 
+              item={currentItem}
+              itemsRef={itemsRef}
+              user={auth.currentUser} 
+              auth={auth}
+              firebase={firebase}
+              firestore={firestore}
               signIn={signInWithGoogle}
               handleCart={handleCart}
               stock={currentItem.stock}
@@ -113,7 +111,7 @@ function App() {
 
         {route === 'cart' && 
             <Cart 
-              user={user}
+              user={auth.currentUser}
               signIn={signInWithGoogle}
               cart={cart} 
               viewItem={viewItem}
@@ -129,6 +127,7 @@ function App() {
             />
         }
     </Layout>
+    </FirestoreContext.Provider>
   );
 }
 

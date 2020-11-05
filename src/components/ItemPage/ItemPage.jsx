@@ -1,25 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import OrderAmount from '../OrderAmount/OrderAmount'
 import Review from '../Review/Review'
 import LeaveReview from '../LeaveReview/LeaveReview'
 
 import styles from './ItemPage.module.sass'
-import list from '../../assets/reviews'
 
-export default function ItemPage({ item, user, signIn, setRoute, stock, handleCart }) {
+
+export default function ItemPage({ item, itemsRef, user, auth, signIn, setRoute, stock, handleCart, firebase, firestore }) {
     
     const { image, name, price, description } = item;
 
-    const [reviews, setReviews] = useState([]);
+    const [reviews] = useState(item.reviews);
     const [inCart, setInCart] = useState(item.inCart);
     const [amount, setAmount] = useState(1); // Amount of item to be added to cart
-
-
-    // Fetch the item's reviews
-    useEffect(() => {
-        setReviews(list)
-    }, [])
 
 
     function updateCart() {
@@ -83,23 +77,30 @@ export default function ItemPage({ item, user, signIn, setRoute, stock, handleCa
                     <p>{description}</p>
                 </article>
             </section>
-
+{/*
             <div>
                 <LeaveReview 
-                  user={user} 
+                  user={user}
+                  auth={auth}
+                  item={item}
+                  itemsRef={itemsRef}
                   signIn={signIn}
+                  firestore={firestore}
+                  firebase={firebase}
                 />
-                <h1>User reviews</h1>
+                <h1>User reviews:</h1>
                 <div>
-                    {reviews.map((review, i) => 
+                    {reviews.length
+                        ? reviews.map((review, i) => 
                             <Review
-                                key={i}
+                                key={review.uid}
                                 review={review}
                             />
-                        )
+                          )
+                        : <p className="txt-center m1">There aren't any reviews for this item yet. Be the first to write one!</p>
                     }
                 </div>
-            </div>
+            </div> */}
 
         </div>
     )

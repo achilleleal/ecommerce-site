@@ -21,6 +21,7 @@ export default function SellProduct({ itemsRef, auth, setRoute }) {
 
         await itemsRef.add({
             ...newProduct,
+            reviews: [],
             uid: uid
         })
 
