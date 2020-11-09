@@ -5,7 +5,12 @@ export default function ItemCard({ name, price, image, stock, viewItem, inCart }
     return (
         <article className={`card grow flex col center-x center-y pointer ${styles.card}`} onClick={viewItem}>
             <div className={styles.img_container}>
-                <img src={image} alt=''/>
+                <div>
+                    <img 
+                    src={image} alt='' 
+                    className={styles.landscape}
+                    />
+                </div>
             </div>
             <div className={styles.info}>
                 <div>
