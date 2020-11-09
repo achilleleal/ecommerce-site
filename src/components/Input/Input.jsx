@@ -16,6 +16,7 @@ export default function Input({ name, type, onInput, placeholder, value, step })
               onInput={onInput}
               step={step}
               min={step === 'price' ? '0.1' : '0'}
+              required
             />
         </div>
     )
