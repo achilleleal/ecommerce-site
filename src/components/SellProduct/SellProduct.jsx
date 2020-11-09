@@ -10,14 +10,14 @@ const blankProduct = {
     stock: '',
 }
 
-export default function SellProduct({ itemsRef, auth, setRoute }) {
+export default function SellProduct({ itemsRef, user, setRoute }) {
 
     const [newProduct, setNewProduct] = useState(blankProduct)
 
     async function publishItem(e) {
         e.preventDefault();
 
-        const { uid } = auth.currentUser;
+        const { uid } = user;
 
         await itemsRef.add({
             ...newProduct,
@@ -27,8 +27,6 @@ export default function SellProduct({ itemsRef, auth, setRoute }) {
 
         setRoute('home')
     }
-
-    console.log(newProduct)
 
     return (
         <div className={styles.sell}>

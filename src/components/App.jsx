@@ -6,7 +6,6 @@ import Home from './Home/Home';
 import ItemPage from './ItemPage/ItemPage';
 import Cart from './Cart/Cart';
 import SellProduct from './SellProduct/SellProduct';
-
 import './App.sass';
 
 import firebase from 'firebase/app';
@@ -84,7 +83,7 @@ function App() {
     <Layout 
       setRoute={setRoute} 
       setSearch={setSearch} 
-      user={auth.currentUser}
+      user={user}
       signIn={signInWithGoogle} 
       signOut={() => auth.signOut()}
     >
@@ -101,7 +100,7 @@ function App() {
         {route === 'item' && 
             <ItemPage 
               item={currentItem}
-              user={auth.currentUser} 
+              user={user} 
               signIn={signInWithGoogle}
               handleCart={handleCart}
               stock={currentItem.stock}
@@ -110,7 +109,7 @@ function App() {
 
         {route === 'cart' && 
             <Cart 
-              user={auth.currentUser}
+              user={user}
               signIn={signInWithGoogle}
               cart={cart} 
               viewItem={viewItem}
@@ -121,7 +120,7 @@ function App() {
 
         {route === 'sell' && 
             <SellProduct
-              auth={auth}
+              user={user}
               itemsRef={itemsRef}
               setRoute={setRoute}
             />
