@@ -7,7 +7,7 @@ export default function Home({ items, viewItem }) {
     if (items) {
         if (items.length) {
             return (
-                <div className="home txt-center">
+                <div className="home">
                     {items.map((item, i) => 
                         <ItemCard 
                         key={i}

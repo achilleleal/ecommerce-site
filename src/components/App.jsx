@@ -40,9 +40,11 @@ function App() {
 
   //* EFFECTS
 
-    // Clear searchbar on route change
+    // Clear searchbar on route change & change document title to match route
     useEffect(() => {
-      setSearch('')
+      setSearch('');
+      document.title = 
+      `${route.charAt(0).toUpperCase() + route.slice(1)} | ReactMart`;
     }, [route])
   
   //* LOGIC
@@ -72,6 +74,10 @@ function App() {
         item.inCart = true;
         item.cartQuantity = quantity;
       }
+    }
+
+    function clearCart() {
+      setCart([])
     }
 
   return (
@@ -109,6 +115,7 @@ function App() {
               cart={cart} 
               viewItem={viewItem}
               handleCart={handleCart}
+              clearCart={clearCart}
             />
         }
 

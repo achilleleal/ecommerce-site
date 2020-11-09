@@ -7,7 +7,7 @@ import LeaveReview from '../LeaveReview/LeaveReview'
 import styles from './ItemPage.module.sass'
 
 
-export default function ItemPage({ item, itemsRef, user, auth, signIn, setRoute, stock, handleCart, firebase, firestore }) {
+export default function ItemPage({ item, user, signIn, setRoute, stock, handleCart }) {
     
     const { image, name, price, description } = item;
 

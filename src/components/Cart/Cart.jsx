@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import CartCard from './CartCard'
+import Checkout from './Checkout'
 import './Cart.sass'
 
-export default function Cart({ user, signIn, cart, viewItem, handleCart }) {
+export default function Cart({ user, signIn, cart, viewItem, handleCart, clearCart }) {
     
     // Remove $ sign from price and turn into number
     const format = price => Number(price.slice(0, - 1))
@@ -12,6 +13,8 @@ export default function Cart({ user, signIn, cart, viewItem, handleCart }) {
 
     const [total, setTotal] = useState(calcTotal())
     const [refreshCart, setRefreshCart] = useState(false) //Refresh page on click. This way allows the user to undo deleting an item.
+    const [inCheckout, setInCheckout] = useState(false)
+    const [hasPayed, setHasPayed] = useState(false)
 
 
     useEffect(() => {
@@ -41,8 +44,21 @@ export default function Cart({ user, signIn, cart, viewItem, handleCart }) {
                     )
                 }
                 <h1>Total:{total}$</h1>
+                <Checkout 
+                  clearCart={clearCart}
+                  inCheckout={inCheckout} 
+                  setInCheckout={setInCheckout}
+                  setHasPayed={setHasPayed} 
+                />
             </div>
         );
+
+    } else if (hasPayed) {
+        return (
+            <div className='empty-cart'>
+                <h1>Thank you for your purchase!</h1>
+            </div>
+        )
 
     } else {
         return (
