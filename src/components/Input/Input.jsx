@@ -1,7 +1,7 @@
 import React from 'react'
-import styles from './SellProduct.module.sass'
+import './Input.sass'
 
-export default function SellInput({ name, type, onInput, placeholder, value, step }) {
+export default function Input({ name, type, onInput, placeholder, value, step }) {
 
     const capitalize = word => word.charAt(0).toUpperCase() + word.slice(1)
 
@@ -12,7 +12,7 @@ export default function SellInput({ name, type, onInput, placeholder, value, ste
               id={name} 
               value={value}
               placeholder={capitalize(placeholder || name)}
-              className={styles.auth_input}
+              className='auth-input'
               onInput={onInput}
               step={step}
               min={step === 'price' ? '0.1' : '0'}

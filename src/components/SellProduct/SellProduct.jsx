@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import SellInput from './SellInput'
+import Input from '../Input/Input'
 import styles from './SellProduct.module.sass'
 
 const blankProduct = {
@@ -37,30 +37,29 @@ export default function SellProduct({ itemsRef, auth, setRoute }) {
                 <img src={newProduct.image} alt=""/>
             </div>
             <form onSubmit={publishItem}>
-                <SellInput 
+                <Input 
                   name="name" 
                   type="text"
-                  value={newProduct.name}
                   onInput={(e) => setNewProduct({...newProduct, name: e.target.value})}
                 />
-                <SellInput 
+                <Input 
                   name="description" 
                   type="text"
                   onInput={(e) => setNewProduct({...newProduct, description: e.target.value})}
                 />
-                <SellInput 
+                <Input 
                   name="image URL" 
                   type="text"
                   onInput={(e) => setNewProduct({...newProduct, image: e.target.value})}
                 />
-                <SellInput 
+                <Input 
                   name="price ($)"
                   placeholder="Price"
                   type="number"
                   step='0.01'
                   onInput={(e) => setNewProduct({...newProduct, price: e.target.value + '$'})}
                 />
-                <SellInput 
+                <Input 
                   name="stock" 
                   type="number"
                   onInput={(e) => setNewProduct({...newProduct, stock: e.target.value})}
