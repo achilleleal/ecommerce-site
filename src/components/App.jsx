@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import Layout from "./Layout/Layout";
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary'
 import Home from './Home/Home';
 import ItemPage from './ItemPage/ItemPage';
 import Cart from './Cart/Cart';
@@ -81,8 +82,9 @@ function App() {
       signIn={signInWithGoogle} 
       signOut={() => auth.signOut()}
     >
-      {/* PAGE ROUTING: When route matches, it returns the component.*/}
+      <ErrorBoundary>
 
+        {/* PAGE ROUTING: When route matches, it returns the component.*/}
         {route === 'home' && 
             <Home 
               items={filterItems(items)} 
@@ -117,6 +119,8 @@ function App() {
               setRoute={setRoute}
             />
         }
+
+      </ErrorBoundary>
     </Layout>
   );
 }
