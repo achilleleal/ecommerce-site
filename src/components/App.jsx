@@ -30,21 +30,23 @@ function App() {
     const [user] = useAuthState(auth);
 
     const itemsRef = firestore.collection('items'); // Firebase collection that contains the store products
-    const [items] = useCollectionData(itemsRef); // 
+    const [items] = useCollectionData(itemsRef); // itemsRef turned into an array
 
     const [route, setRoute] = useState('home'); // Routing
     const [search, setSearch] = useState(''); // Searchbar value
     const [currentItem, setCurrentItem] = useState({});
     const [cart, setCart] = useState([]); // Shopping cart
 
+    const [delStatus, setDelStatus] = useState(undefined);
+
   //* EFFECTS
 
     // Clear searchbar on route change & change document title to match route
     useEffect(() => {
       setSearch('');
-      document.title = 
-      `${route.charAt(0).toUpperCase() + route.slice(1)} | ReactMart`;
-    }, [route])
+      document.title = `${currentItem.name || route.charAt(0).toUpperCase() + route.slice(1)} | ReactMart`;
+    }, [route, currentItem])
+
   
   //* LOGIC
 
@@ -54,7 +56,9 @@ function App() {
       auth.signInWithPopup(provider)
     }
 
+    
     const filterItems = arr => arr?.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
+
 
     // View the clicked on item
     function viewItem(item) {
@@ -62,6 +66,7 @@ function App() {
       setRoute('item');
     }
     
+
     // Adds or removes the item from the cart and sets its quantity value
     function handleCart(item, quantity) {
       if (cart.includes(item)) {
@@ -75,8 +80,51 @@ function App() {
       }
     }
 
+
     function clearCart() {
       setCart([])
+    }
+
+
+    // Deletes the passed item if it was posted by current user
+    async function deleteItem(item) {
+      try {
+        // From: https://stackoverflow.com/questions/47180076/how-to-delete-document-from-firestore-using-where-clause
+        // Await the querySnapshot to modify the collection
+        const querySnapshot = await itemsRef
+          .where('name', '==', item.name)
+          .where('uid', '==', user.uid)
+          .get();
+        
+        // Delete the matching document based on its ref 
+        // and update the state to show a success message
+        querySnapshot.forEach(doc => {
+          doc.ref.delete()
+          setDelStatus(true)
+        })
+        
+      } catch {
+        setDelStatus(false)
+      }
+      
+      // Clear status message after 5 seconds
+      setTimeout(() => {
+        setDelStatus(undefined)
+      }, 5000)
+
+      setRoute('home')
+    }
+
+
+    const deleteStatusClasses = () => {
+      if (delStatus !== undefined) {
+        if (delStatus) {
+          return 'ok' // Success
+        }
+        return 'err' // Error
+      }
+      // Nothing has been deleted. Don't show any messages
+      return 'hide'
     }
 
   return (
@@ -89,6 +137,14 @@ function App() {
     >
       <ErrorBoundary>
 
+        {/* Delete Message */}
+        <h3 className={`${deleteStatusClasses()} txt-center m1`}>
+          {delStatus
+            ? 'Delete succesful!'
+            : 'There was an error deleting the item'
+          } 
+        </h3>
+
         {/* PAGE ROUTING: When route matches, it returns the component.*/}
         {route === 'home' && 
             <Home 
@@ -100,10 +156,11 @@ function App() {
         {route === 'item' && 
             <ItemPage 
               item={currentItem}
+              setCurrentItem={setCurrentItem}
+              deleteItem={deleteItem}
               user={user} 
               signIn={signInWithGoogle}
               handleCart={handleCart}
-              stock={currentItem.stock}
             />
         }
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import OrderAmount from '../OrderAmount/OrderAmount'
 import Review from '../Review/Review'
@@ -7,9 +7,9 @@ import LeaveReview from '../LeaveReview/LeaveReview'
 import styles from './ItemPage.module.sass'
 
 
-export default function ItemPage({ item, user, signIn, setRoute, stock, handleCart }) {
+export default function ItemPage({ item, setCurrentItem, user, signIn, setRoute, handleCart, deleteItem }) {
     
-    const { image, name, price, description } = item;
+    const { image, name, price, description, stock } = item;
 
     const [reviews] = useState(item.reviews);
     const [inCart, setInCart] = useState(item.inCart);
@@ -21,11 +21,24 @@ export default function ItemPage({ item, user, signIn, setRoute, stock, handleCa
         setInCart(prevInCart => !inCart)
     }
     
+    // On unmount, clear current item to update the page title
+    useEffect(() => {
+        return () => setCurrentItem([])
+    }, [])
     
     return (
         <div className={styles.page}>
 
             <section className={`card ${styles.card}`}>
+
+                {user.uid === item.uid &&
+                    <button className={styles.delete_btn} 
+                      onClick={() => deleteItem(item)}
+                    >
+                        Delete
+                    </button>
+                }
+
                 <div className={styles.img_container}>
                     <img src={image} alt=''/>
                 </div>
@@ -57,6 +70,7 @@ export default function ItemPage({ item, user, signIn, setRoute, stock, handleCa
                                     </>
                             }
                         </div>
+
                       : <div className="flex between center-y">
                             <p>You must be signed in to add items to your cart.</p>
                             <button 
