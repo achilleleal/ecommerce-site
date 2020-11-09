@@ -22,8 +22,6 @@ firebase.initializeApp(firebaseConfig)
 const auth = firebase.auth()
 const firestore = firebase.firestore();
 
-const FirestoreContext = React.createContext()
-const AuthContext = React.createContext()
 
 function App() {
 
@@ -38,8 +36,6 @@ function App() {
     const [search, setSearch] = useState(''); // Searchbar value
     const [currentItem, setCurrentItem] = useState({});
     const [cart, setCart] = useState([]); // Shopping cart
-
-    console.log(itemsRef)
 
   //* EFFECTS
 
@@ -56,7 +52,7 @@ function App() {
       auth.signInWithPopup(provider)
     }
 
-    const filterItems = arr => arr.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
+    const filterItems = arr => arr?.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
 
     // View the clicked on item
     function viewItem(item) {
@@ -78,7 +74,6 @@ function App() {
     }
 
   return (
-    <FirestoreContext.Provider value={firestore}>
     <Layout 
       setRoute={setRoute} 
       setSearch={setSearch} 
@@ -90,7 +85,7 @@ function App() {
 
         {route === 'home' && 
             <Home 
-              items={items || []} 
+              items={filterItems(items)} 
               viewItem={viewItem}
             />
         }
@@ -98,11 +93,7 @@ function App() {
         {route === 'item' && 
             <ItemPage 
               item={currentItem}
-              itemsRef={itemsRef}
               user={auth.currentUser} 
-              auth={auth}
-              firebase={firebase}
-              firestore={firestore}
               signIn={signInWithGoogle}
               handleCart={handleCart}
               stock={currentItem.stock}
@@ -127,7 +118,6 @@ function App() {
             />
         }
     </Layout>
-    </FirestoreContext.Provider>
   );
 }
 
