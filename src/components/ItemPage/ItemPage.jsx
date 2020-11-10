@@ -7,7 +7,7 @@ import LeaveReview from '../LeaveReview/LeaveReview'
 import styles from './ItemPage.module.sass'
 
 
-export default function ItemPage({ item, setCurrentItem, user, signIn, setRoute, handleCart, deleteItem }) {
+export default function ItemPage({ item, setCurrentItem, user, signIn, setRoute, handleCart, deleteItem, itemsRef, firebase }) {
     
     const { image, name, price, description, stock } = item;
 
@@ -31,7 +31,7 @@ export default function ItemPage({ item, setCurrentItem, user, signIn, setRoute,
 
             <section className={`card ${styles.card}`}>
 
-                {user.uid === item.uid &&
+                {user && user.uid === item.uid &&
                     <button className={styles.delete_btn} 
                       onClick={() => deleteItem(item)}
                     >
@@ -91,15 +91,13 @@ export default function ItemPage({ item, setCurrentItem, user, signIn, setRoute,
                     <p>{description}</p>
                 </article>
             </section>
-{/*
+
             <div>
                 <LeaveReview 
                   user={user}
-                  auth={auth}
                   item={item}
                   itemsRef={itemsRef}
                   signIn={signIn}
-                  firestore={firestore}
                   firebase={firebase}
                 />
                 <h1>User reviews:</h1>
@@ -114,7 +112,7 @@ export default function ItemPage({ item, setCurrentItem, user, signIn, setRoute,
                         : <p className="txt-center m1">There aren't any reviews for this item yet. Be the first to write one!</p>
                     }
                 </div>
-            </div> */}
+            </div>
 
         </div>
     )

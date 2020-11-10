@@ -81,9 +81,7 @@ function App() {
     }
 
 
-    function clearCart() {
-      setCart([])
-    }
+    const clearCart = () => setCart([])
 
 
     // Deletes the passed item if it was posted by current user
@@ -104,7 +102,7 @@ function App() {
         })
         
       } catch {
-        setDelStatus(false)
+        setDelStatus(false) //Show error message
       }
       
       // Clear status message after 5 seconds
@@ -123,8 +121,7 @@ function App() {
         }
         return 'err' // Error
       }
-      // Nothing has been deleted. Don't show any messages
-      return 'hide'
+      return 'hide' // Nothing has been deleted. Don't show any messages
     }
 
   return (
@@ -161,6 +158,8 @@ function App() {
               user={user} 
               signIn={signInWithGoogle}
               handleCart={handleCart}
+              itemsRef={itemsRef}
+              firebase={firebase}
             />
         }
 

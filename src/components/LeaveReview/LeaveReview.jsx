@@ -1,34 +1,45 @@
 import React, { useState } from 'react'
 import styles from './LeaveReview.module.sass'
+import Input from '../Input/Input'
 
-
-export default function LeaveReview({ user, item, itemsRef, auth, signIn, firestore, firebase }) {
+export default function LeaveReview({ user, item, itemsRef, signIn, firebase }) {
     
     const [review, setReview] = useState('')
+    const [rating, setRating] = useState(0)
 
     async function postReview(e) {
         if (review) {
 
             e.preventDefault();
 
-            const { uid, displayName, photoURL } = auth.currentUser;
+            try {
+                const { uid, displayName, photoURL } = user;
+                
+                const querySnapshot = await itemsRef
+                    .where('name', '==', item.name)
+                    .where('uid', '==', item.uid)
+                    .get()
+                
+                querySnapshot.forEach(doc => {
+                    const fullReview = {
+                        user: displayName,
+                        profileImg: photoURL,
+                        content: review,
+                        rating: rating,
+                        uid: uid,
+                    }
+                    
+                    doc.ref.update({
+                        reviews: firebase.firestore.FieldValue.arrayUnion(fullReview)
+                    })
+                })
 
-            const fullReview = {
-                user: displayName,
-                profileImg: photoURL,
-                content: review,
-                date: firebase.firestore.FieldValue.serverTimestamp(),
-                uid: uid
+                setReview('')
+                setRating(0)
+
+            } catch(err) {
+                console.log('There was an error writing the review', err)
             }
-            
-            const d = await itemsRef.where('name', '==', item.name).get()
-            await d.forEach(i => console.log(i)
-                // i.update({
-                // reviews: firebase.firestore.FieldValue.arrayUnion(fullReview)
-            // })
-            )
-
-            setReview('')
         }
     }
 
@@ -46,6 +57,14 @@ export default function LeaveReview({ user, item, itemsRef, auth, signIn, firest
                             onChange={(e) => setReview(e.target.value)}
                         />
                         <div className={styles.send_review}>
+                            <Input 
+                                name="Rating" 
+                                type="number" 
+                                max='5' 
+                                value={rating}
+                                onChange={(e) => setRating(e.target.value)}
+                                placeholder=""
+                            />
                             <button type='submit' 
                                 className="btn"
                             >

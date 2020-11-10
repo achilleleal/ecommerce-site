@@ -38,29 +38,29 @@ export default function SellProduct({ itemsRef, user, setRoute }) {
                 <Input 
                   name="name" 
                   type="text"
-                  onInput={(e) => setNewProduct({...newProduct, name: e.target.value})}
+                  onChange={(e) => setNewProduct({...newProduct, name: e.target.value})}
                 />
                 <Input 
                   name="description" 
                   type="text"
-                  onInput={(e) => setNewProduct({...newProduct, description: e.target.value})}
+                  onChange={(e) => setNewProduct({...newProduct, description: e.target.value})}
                 />
                 <Input 
                   name="image URL" 
                   type="text"
-                  onInput={(e) => setNewProduct({...newProduct, image: e.target.value})}
+                  onChange={(e) => setNewProduct({...newProduct, image: e.target.value})}
                 />
                 <Input 
                   name="price ($)"
                   placeholder="Price"
                   type="number"
                   step='0.01'
-                  onInput={(e) => setNewProduct({...newProduct, price: e.target.value + '$'})}
+                  onChange={(e) => setNewProduct({...newProduct, price: e.target.value + '$'})}
                 />
                 <Input 
                   name="stock" 
                   type="number"
-                  onInput={(e) => setNewProduct({...newProduct, stock: e.target.value})}
+                  onChange={(e) => setNewProduct({...newProduct, stock: e.target.value})}
                 />
                 <button className="btn" type="submit">
                     Submit

@@ -8,7 +8,7 @@ export default function Review({ review }) {
         <div className={`card ${styles.review}`}>
             <div className={styles.user}>
                 <img src={review.profileImg || defaultPf} alt='' className={`profile-image ${styles.pf_image}`}/>
-                <p>{review.name}</p>
+                <p>{review.user}</p>
             </div>
             <article className={styles.content}>
                 <h3>{review.rating}/5</h3>
