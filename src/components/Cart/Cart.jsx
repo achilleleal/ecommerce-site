@@ -25,7 +25,7 @@ export default function Cart({ user, signIn, cart, viewItem, handleCart, clearCa
     if (user && cart.length) {
 
         return (
-            <div className="cart">
+            <div className="card cart">
                 <div className="txt-center" style={{marginBottom: '1rem'}}>
                     <button className="btn" onClick={() => setRefreshCart(prev => !prev)}>
                         Refresh Cart

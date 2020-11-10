@@ -15,7 +15,7 @@ export default function Checkout({ clearCart, inCheckout, setInCheckout, setHasP
         <div className='flex col center-x center-y'>
         <button 
           className='btn' 
-          onClick={() => setInCheckout(true)}>
+          onClick={() => setInCheckout(prev => !prev)}>
             Checkout
         </button>
         {inCheckout &&

@@ -30,7 +30,7 @@ export default function SellProduct({ itemsRef, user, setRoute }) {
 
     return (
         <div className={styles.sell}>
-            <h1 className='txt-center'>Sell a new product</h1>
+            <h1 className='txt-center'>Sell a <span>new product</span></h1>
             <div className='flex center-x'>
                 <img src={newProduct.image} alt=""/>
             </div>

@@ -12,21 +12,17 @@
         margin-bottom: 1rem
 
     img
+        $max: 300px
+
         width: 100%
-        max-width: 300px
+        max-width: $max
+        max-height: $max
 
     p
         text-align: center
 
     span
         color: base.$secondary
-        text-decoration: underline
-        cursor: pointer
-        margin-left: 5px 
-        
-        &:hover
-            transition: 100ms
-            color: base.$secondary-light
 
     button
         margin-top: .5rem

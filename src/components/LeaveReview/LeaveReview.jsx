@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import styles from './LeaveReview.module.sass'
 import Input from '../Input/Input'
+import styles from './LeaveReview.module.sass'
 
 export default function LeaveReview({ user, item, itemsRef, signIn, firebase }) {
     

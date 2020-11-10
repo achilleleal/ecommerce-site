@@ -7,7 +7,7 @@ export default function CartCard({ item, price, viewItem, handleCart }) {
     const { cartQuantity  } = item;
 
     return(
-        <article className="card cart-card grow">
+        <article className="cart-card">
             <div onClick={viewItem} className="pointer cart-main">
                 <div className="cart-img">
                     <img src={item.image} alt=''/>
