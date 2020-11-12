@@ -103,13 +103,14 @@ function App() {
         
       } catch {
         setDelStatus(false) //Show error message
+
+      } finally {
+        setTimeout(() => {
+          setDelStatus(undefined)
+        }, 5000)
       }
       
       // Clear status message after 5 seconds
-      setTimeout(() => {
-        setDelStatus(undefined)
-      }, 5000)
-
       setRoute('home')
     }
 

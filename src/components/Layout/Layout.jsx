@@ -1,6 +1,14 @@
 import React from 'react'
+
+import { faStore, 
+         faShoppingCart, 
+         faMoneyCheckAlt, 
+         faSignInAlt, 
+         faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+
 import Searchbar from './Searchbar/Searchbar';
 import Link from './Link'
+import { ReactComponent as Github } from '../../assets/github-logo.svg'
 import './Layout.sass'
 
 export default function Layout({ children, setSearch, setRoute, user, signIn, signOut  }) {
@@ -18,24 +26,24 @@ export default function Layout({ children, setSearch, setRoute, user, signIn, si
                     <ul className="nav-bar">
                         <Link 
                           to="ReactMart"
-                          image=""
+                          icon={faStore}
                           onClick={() => setRoute('home')}
                         />
                         <Link 
                           to="Cart"
-                          image=""
+                          icon={faShoppingCart}
                           onClick={() => setRoute('cart')}
                         />
                         {user &&
                           <Link 
                             to="Sell"
-                            image=""
+                            icon={faMoneyCheckAlt}
                             onClick={() => setRoute('sell')}
                           />
                         }
                         <Link 
                           to={user ? 'Sign Out' : 'Sign In'}
-                          image=""
+                          icon={user ? faSignOutAlt : faSignInAlt}
                           onClick={handleUser}
                         />
                     </ul>
@@ -47,6 +55,12 @@ export default function Layout({ children, setSearch, setRoute, user, signIn, si
             </main>
             <footer>
                 <p>Made with love by Sebastián Leal. 2020.</p>
+                <a href="https://github.com/achilleleal/ecommerce-site"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                >
+                  <Github fill='white'/>
+                </a>
             </footer>
         </>
     )

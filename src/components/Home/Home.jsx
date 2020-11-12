@@ -10,13 +10,16 @@ export default function Home({ items, viewItem }) {
                 <div className="home">
                     {items.map((item, i) => 
                         <ItemCard 
-                        key={i}
-                        name={item.name}
-                        price={item.price}
-                        image={item.image}
-                        stock={item.stock}
-                        viewItem={() => viewItem(item)}
-                        />)}
+                            key={item.uid + (Math.random() * 100)}
+                            name={item.name}
+                            price={item.price}
+                            image={item.image}
+                            stock={item.stock}
+                            inCart={item.inCart}
+                            reviews={item.reviews}
+                            viewItem={() => viewItem(item)}
+                        />)
+                    }
                 </div>
             )
         }

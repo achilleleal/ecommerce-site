@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSyncAlt } from '@fortawesome/free-solid-svg-icons'
+
 import CartCard from './CartCard'
 import Checkout from './Checkout'
 import './Cart.sass'
@@ -27,8 +31,8 @@ export default function Cart({ user, signIn, cart, viewItem, handleCart, clearCa
         return (
             <div className="card cart">
                 <div className="txt-center" style={{marginBottom: '1rem'}}>
-                    <button className="btn" onClick={() => setRefreshCart(prev => !prev)}>
-                        Refresh Cart
+                    <button className="btn refresh" onClick={() => setRefreshCart(prev => !prev)}>
+                        <FontAwesomeIcon icon={faSyncAlt} />
                     </button>
                 </div>
                 
@@ -43,7 +47,7 @@ export default function Cart({ user, signIn, cart, viewItem, handleCart, clearCa
                         />
                     )
                 }
-                <h1>Total:{total}$</h1>
+                <h1>Total: {total}$</h1>
                 <Checkout 
                   clearCart={clearCart}
                   inCheckout={inCheckout} 

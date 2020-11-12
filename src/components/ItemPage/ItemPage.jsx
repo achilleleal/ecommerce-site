@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
+
 import OrderAmount from '../OrderAmount/OrderAmount'
 import Review from '../Review/Review'
 import LeaveReview from '../LeaveReview/LeaveReview'
@@ -35,12 +38,13 @@ export default function ItemPage({ item, setCurrentItem, user, signIn, setRoute,
                     <button className={styles.delete_btn} 
                       onClick={() => deleteItem(item)}
                     >
+                        <FontAwesomeIcon icon={faTrash} />
                         Delete
                     </button>
                 }
 
                 <div className={styles.img_container}>
-                    <img src={image} alt=''/>
+                    {/* <img src={image} alt=''/> */}
                 </div>
                 <article>
                     <div className={styles.head}>

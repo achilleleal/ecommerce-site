@@ -25,7 +25,7 @@ export default function LeaveReview({ user, item, itemsRef, signIn, firebase }) 
                         user: displayName,
                         profileImg: photoURL,
                         content: review,
-                        rating: rating,
+                        rating: Number(rating),
                         uid: uid,
                     }
                     

@@ -1,4 +1,8 @@
 import React, { useState } from 'react'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCubes } from '@fortawesome/free-solid-svg-icons'
+
 import Input from '../Input/Input'
 import styles from './SellProduct.module.sass'
 
@@ -30,7 +34,10 @@ export default function SellProduct({ itemsRef, user, setRoute }) {
 
     return (
         <div className={styles.sell}>
-            <h1 className='txt-center'>Sell a <span>new product</span></h1>
+            <div className="flex center-x">
+              <FontAwesomeIcon icon={faCubes} size='4x' />
+            </div>
+            <h1 className="txt-center">Sell a <span>new product</span></h1>
             <div className='flex center-x'>
                 <img src={newProduct.image} alt=""/>
             </div>
