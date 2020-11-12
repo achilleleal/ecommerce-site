@@ -4,13 +4,15 @@ import './Home.sass'
 
 export default function Home({ items, viewItem }) {
 
+    const generateKey = name => `${name}_${new Date().getTime()}`
+
     if (items) {
         if (items.length) {
             return (
                 <div className="home">
-                    {items.map((item, i) => 
+                    {items.map(item => 
                         <ItemCard 
-                            key={item.uid + (Math.random() * 100)}
+                            key={generateKey(item.name)}
                             name={item.name}
                             price={item.price}
                             image={item.image}

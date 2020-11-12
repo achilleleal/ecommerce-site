@@ -44,7 +44,7 @@ export default function ItemPage({ item, setCurrentItem, user, signIn, setRoute,
                 }
 
                 <div className={styles.img_container}>
-                    {/* <img src={image} alt=''/> */}
+                    <img src={image} alt=''/>
                 </div>
                 <article>
                     <div className={styles.head}>

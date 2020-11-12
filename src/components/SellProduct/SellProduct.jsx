@@ -11,7 +11,7 @@ const blankProduct = {
     image: '',
     description: '',
     price: '',
-    stock: '',
+    stock: 0,
 }
 
 export default function SellProduct({ itemsRef, user, setRoute }) {
@@ -67,7 +67,7 @@ export default function SellProduct({ itemsRef, user, setRoute }) {
                 <Input 
                   name="stock" 
                   type="number"
-                  onChange={(e) => setNewProduct({...newProduct, stock: e.target.value})}
+                  onChange={(e) => setNewProduct({...newProduct, stock: Number(e.target.value)})}
                 />
                 <button className="btn" type="submit">
                     Submit
