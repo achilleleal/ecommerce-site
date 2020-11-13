@@ -14,7 +14,7 @@ const blankProduct = {
     stock: 0,
 }
 
-export default function SellProduct({ itemsRef, user, setRoute }) {
+export default function SellProduct({ itemsRef, user, routeTo }) {
 
     const [newProduct, setNewProduct] = useState(blankProduct)
 
@@ -29,7 +29,7 @@ export default function SellProduct({ itemsRef, user, setRoute }) {
             uid: uid
         })
 
-        setRoute('home')
+        routeTo('home')
     }
 
     return (

@@ -56,6 +56,10 @@ function App() {
       auth.signInWithPopup(provider)
     }
 
+    function routeTo(route) {
+      setRoute(route)
+      window.scrollTo(0,0)
+    }
     
     const filterItems = arr => arr?.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
 
@@ -63,7 +67,7 @@ function App() {
     // View the clicked on item
     function viewItem(item) {
       setCurrentItem(item);
-      setRoute('item');
+      routeTo('item');
     }
     
 
@@ -81,7 +85,14 @@ function App() {
     }
 
 
-    const clearCart = () => setCart([])
+    function clearCart() {
+      // Clear the inCart & quantity property of every item
+      items.forEach(item => {
+        item.inCart = false;
+        item.quantity = 0;
+      })
+      setCart([])
+    }
 
 
     // Deletes the passed item if it was posted by current user
@@ -111,7 +122,7 @@ function App() {
       }
       
       // Clear status message after 5 seconds
-      setRoute('home')
+      routeTo('home')
     }
 
 
@@ -127,7 +138,7 @@ function App() {
 
   return (
     <Layout 
-      setRoute={setRoute} 
+      routeTo={routeTo} 
       setSearch={setSearch} 
       user={user}
       signIn={signInWithGoogle} 
@@ -179,7 +190,7 @@ function App() {
             <SellProduct
               user={user}
               itemsRef={itemsRef}
-              setRoute={setRoute}
+              routeTo={routeTo}
             />
         }
 

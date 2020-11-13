@@ -11,7 +11,7 @@ import Link from './Link'
 import { ReactComponent as Github } from '../../assets/github-logo.svg'
 import './Layout.sass'
 
-export default function Layout({ children, setSearch, setRoute, user, signIn, signOut  }) {
+export default function Layout({ children, setSearch, routeTo, user, signIn, signOut  }) {
 
     function handleUser() {
         !user 
@@ -27,18 +27,18 @@ export default function Layout({ children, setSearch, setRoute, user, signIn, si
                         <Link 
                           to="ReactMart"
                           icon={faStore}
-                          onClick={() => setRoute('home')}
+                          onClick={() => routeTo('home')}
                         />
                         <Link 
                           to="Cart"
                           icon={faShoppingCart}
-                          onClick={() => setRoute('cart')}
+                          onClick={() => routeTo('cart')}
                         />
                         {user &&
                           <Link 
                             to="Sell"
                             icon={faMoneyCheckAlt}
-                            onClick={() => setRoute('sell')}
+                            onClick={() => routeTo('sell')}
                           />
                         }
                         <Link 
