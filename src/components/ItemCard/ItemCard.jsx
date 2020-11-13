@@ -14,8 +14,6 @@ export default function ItemCard({ name, price, image, stock, reviews, viewItem,
         }
     }
 
-    console.log(inCart, name)
-
     return (
         <article className={`card grow flex col center-x center-y pointer ${styles.card}`} onClick={viewItem}>
             <div className={styles.img_container}>
