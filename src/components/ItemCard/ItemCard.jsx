@@ -30,7 +30,7 @@ export default function ItemCard({ name, price, image, stock, reviews, viewItem,
                     <h2>{name}</h2>
                     <h3>{price}</h3>
                 </div>
-                <h4 className={`txt-center ${stock ? 'ok' : 'err'}`}>
+                <h4 className={stock ? 'ok' : 'err'}>
                     {inCart && 'In cart'}
                     {stock ? '' : 'Out of stock'}
                 </h4>

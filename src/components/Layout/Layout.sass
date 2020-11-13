@@ -29,9 +29,20 @@ footer
     cursor: pointer
     margin-top: .5rem
 
-    h1
-        margin-left: .5rem
-    
     &:hover
         transition: 200ms
         color: base.$secondary
+
+    h1
+        margin-left: .5rem
+
+        @media (max-width: 500px)
+            font-size: 1em
+            margin: 0
+    
+    svg
+        @media (max-width: 500px)
+            transform: scale(.5)
+
+        @media (max-width: 350px)
+            display: none

@@ -20,10 +20,18 @@
         max-height: 200px
 
 .info
-    height: 25%
+    height: 30%
     min-height: 5em
     width: 90%
     display: flex
     justify-content: space-between
     align-items: center
     border-top: solid 2px base.$primary-light
+
+    @media (max-width: 400px)
+        width: 100%
+        flex-direction: column
+
+        h4
+            margin-top: .25rem
+        

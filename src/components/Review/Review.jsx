@@ -12,9 +12,9 @@ export default function Review({ review }) {
                 <p>{review.user || 'Unknown'}</p>
             </div>
             <article className={styles.content}>
-                <h3 className="flex center-y">
+                <div className="flex center-y">
                     <StarCount rating={review.rating}/>
-                </h3>
+                </div>
                 <p>{review.content}</p>
                 <span>{review.date}</span>
             </article>
