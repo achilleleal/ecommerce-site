@@ -7,6 +7,7 @@ import OrderAmount from '../OrderAmount/OrderAmount'
 import Review from '../Review/Review'
 import LeaveReview from '../LeaveReview/LeaveReview'
 
+import { generateKey } from '../../utils'
 import styles from './ItemPage.module.sass'
 
 
@@ -109,7 +110,7 @@ export default function ItemPage({ item, setCurrentItem, user, signIn, setRoute,
                     {reviews.length
                         ? reviews.map((review, i) => 
                             <Review
-                                key={review.uid}
+                                key={generateKey()}
                                 review={review}
                             />
                           )
