@@ -6,6 +6,9 @@ import { faCubes } from '@fortawesome/free-solid-svg-icons'
 import Input from '../Input/Input'
 import styles from './SellProduct.module.sass'
 
+import { itemsRef } from '../../middleware/firebase'
+
+
 const blankProduct = {
     name: '',
     image: '',
@@ -14,7 +17,7 @@ const blankProduct = {
     stock: 0,
 }
 
-export default function SellProduct({ itemsRef, user, routeTo }) {
+export default function SellProduct({ user, routeTo }) {
 
     const [newProduct, setNewProduct] = useState(blankProduct)
 

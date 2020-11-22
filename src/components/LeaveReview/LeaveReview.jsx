@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 import Input from '../Input/Input'
 import styles from './LeaveReview.module.sass'
 
-export default function LeaveReview({ user, item, itemsRef, signIn, firebase }) {
+import { firebase, signInWithGoogle, itemsRef } from '../../middleware/firebase'
+
+export default function LeaveReview({ user, item }) {
     
     const [review, setReview] = useState('')
     const [rating, setRating] = useState(0)
@@ -77,7 +79,7 @@ export default function LeaveReview({ user, item, itemsRef, signIn, firebase }) 
                         <p>You must be logged in to leave a review.</p>
                         <button 
                           className={`btn ${styles.signin}`} 
-                          onClick={signIn}
+                          onClick={signInWithGoogle}
                         >
                             Sign In
                         </button>

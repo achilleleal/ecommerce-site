@@ -1,22 +1,27 @@
 import React from 'react'
 
-import { faStore, 
-         faShoppingCart, 
-         faMoneyCheckAlt, 
-         faSignInAlt, 
-         faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import { 
+  faStore, 
+  faShoppingCart, 
+  faMoneyCheckAlt, 
+  faSignInAlt, 
+  faSignOutAlt 
+} from '@fortawesome/free-solid-svg-icons'
+
+
+import { signInWithGoogle, auth } from '../../middleware/firebase'
 
 import Searchbar from './Searchbar/Searchbar';
 import Link from './Link'
 import { ReactComponent as Github } from '../../assets/github-logo.svg'
 import './Layout.sass'
 
-export default function Layout({ children, setSearch, routeTo, user, signIn, signOut  }) {
+export default function Layout({ children, setSearch, routeTo, user }) {
 
     function handleUser() {
         !user 
-          ? signIn()
-          : signOut()
+          ? signInWithGoogle()
+          : auth.signOut()
     }
 
     return (

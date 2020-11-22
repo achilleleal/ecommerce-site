@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
+
 import Layout from "./Layout/Layout";
 import ErrorBoundary from './ErrorBoundary/ErrorBoundary'
 import Home from './Home/Home';
@@ -8,20 +11,7 @@ import Cart from './Cart/Cart';
 import SellProduct from './SellProduct/SellProduct';
 import './App.sass';
 
-import firebase from 'firebase/app';
-import 'firebase/firestore';
-import 'firebase/auth';
-import firebaseConfig from './firebaseConfig';
-
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { useCollectionData } from 'react-firebase-hooks/firestore'
-
-
-firebase.initializeApp(firebaseConfig)
-
-const auth = firebase.auth()
-const firestore = firebase.firestore();
-
+import { auth, itemsRef } from '../middleware/firebase';
 
 function App() {
 
@@ -29,7 +19,6 @@ function App() {
 
     const [user] = useAuthState(auth);
 
-    const itemsRef = firestore.collection('items'); // Firebase collection that contains the store products
     const [items] = useCollectionData(itemsRef); // itemsRef turned into an array
 
     const [route, setRoute] = useState('home'); // Routing
@@ -49,12 +38,6 @@ function App() {
 
   
   //* LOGIC
-
-    // Firebase signin
-    function signInWithGoogle() {
-      const provider = new firebase.auth.GoogleAuthProvider()
-      auth.signInWithPopup(provider)
-    }
 
     function routeTo(route) {
       setRoute(route)
@@ -141,8 +124,6 @@ function App() {
       routeTo={routeTo} 
       setSearch={setSearch} 
       user={user}
-      signIn={signInWithGoogle} 
-      signOut={() => auth.signOut()}
     >
       <ErrorBoundary>
 
@@ -167,18 +148,14 @@ function App() {
               item={currentItem}
               setCurrentItem={setCurrentItem}
               deleteItem={deleteItem}
-              user={user} 
-              signIn={signInWithGoogle}
+              user={user}
               handleCart={handleCart}
-              itemsRef={itemsRef}
-              firebase={firebase}
             />
         }
 
         {route === 'cart' && 
             <Cart 
               user={user}
-              signIn={signInWithGoogle}
               cart={cart} 
               viewItem={viewItem}
               handleCart={handleCart}
@@ -189,7 +166,6 @@ function App() {
         {route === 'sell' && 
             <SellProduct
               user={user}
-              itemsRef={itemsRef}
               routeTo={routeTo}
             />
         }

@@ -7,7 +7,9 @@ import CartCard from './CartCard'
 import Checkout from './Checkout'
 import './Cart.sass'
 
-export default function Cart({ user, signIn, cart, viewItem, handleCart, clearCart }) {
+import { signInWithGoogle } from '../../middleware/firebase'
+
+export default function Cart({ user, cart, viewItem, handleCart, clearCart }) {
     
     // Remove $ sign from price and turn into number
     const format = price => Number(price.slice(0, - 1))
@@ -77,7 +79,7 @@ export default function Cart({ user, signIn, cart, viewItem, handleCart, clearCa
                     : <>
                         <h2>You must be logged in to see your cart</h2>
                         <button className='btn'
-                        onClick={signIn}>
+                        onClick={signInWithGoogle}>
                             Log In
                         </button>
                       </>

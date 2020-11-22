@@ -6,12 +6,15 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import OrderAmount from '../OrderAmount/OrderAmount'
 import Review from '../Review/Review'
 import LeaveReview from '../LeaveReview/LeaveReview'
-
-import { generateKey } from '../../utils'
 import styles from './ItemPage.module.sass'
 
+import { signInWithGoogle } from '../../middleware/firebase'
 
-export default function ItemPage({ item, setCurrentItem, user, signIn, setRoute, handleCart, deleteItem, itemsRef, firebase }) {
+import { generateKey } from '../../utils'
+
+
+
+export default function ItemPage({ item, setCurrentItem, user, setRoute, handleCart, deleteItem }) {
     
     const { image, name, price, description, stock } = item;
 
@@ -80,7 +83,7 @@ export default function ItemPage({ item, setCurrentItem, user, signIn, setRoute,
                             <p>You must be signed in to add items to your cart.</p>
                             <button 
                               className="btn m1"
-                              onClick={signIn}
+                              onClick={signInWithGoogle}
                             >
                                 Sign In
                             </button>
@@ -101,9 +104,6 @@ export default function ItemPage({ item, setCurrentItem, user, signIn, setRoute,
                 <LeaveReview 
                   user={user}
                   item={item}
-                  itemsRef={itemsRef}
-                  signIn={signIn}
-                  firebase={firebase}
                 />
                 <h1>User reviews:</h1>
                 <div>
